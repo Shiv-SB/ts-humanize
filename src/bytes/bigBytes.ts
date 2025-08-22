@@ -71,14 +71,12 @@ export function parseBigBytes(bytes: string): bigint | undefined {
     const len = bytes.length;
     let lastDigit = 0;
     let hasComma = false;
-    let hasDot = false;
     for (let i = 0; i < len; i++) {
         const digit = bytes[i]!;
         if (!(digit >= "0" && digit <= "9" || digit === "." || digit === ",")) {
             break;
         }
         if (digit === ",") hasComma = true;
-        if (digit === ".") hasDot = true;
         lastDigit++;
     }
 
