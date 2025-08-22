@@ -48,17 +48,17 @@ export type Prefixes =
     "ei"    |
     "e";
 
-export const IEC_BYTES = new Map<IEC_Units, bigint>([
-    ["Byte", 1n << (0n * 10n)],
-    ["KiByte", 1n << (1n * 10n)],
-    ["MiByte", 1n << (2n * 10n)],
-    ["GiByte", 1n << (3n * 10n)],
-    ["TiByte", 1n << (4n * 10n)],
-    ["PiByte", 1n << (5n * 10n)],
-    ["EiByte", 1n << (6n * 10n)],
+export const IEC_BYTES: ReadonlyMap<IEC_Units, bigint> = new Map([
+    ["Byte", 1n << (0n * 10n)],     // 1n
+    ["KiByte", 1n << (1n * 10n)],   // 1024n
+    ["MiByte", 1n << (2n * 10n)],   // 1048576n
+    ["GiByte", 1n << (3n * 10n)],   // 1073741824n
+    ["TiByte", 1n << (4n * 10n)],   // 1099511627776n
+    ["PiByte", 1n << (5n * 10n)],   // 1125899906842624n
+    ["EiByte", 1n << (6n * 10n)],   // 1152921504606846976n
 ]);
 
-export const SI_BYTES = new Map<SI_Units, bigint>([
+export const SI_BYTES: ReadonlyMap<SI_Units, bigint> = new Map([
     ["Byte", 1n],                           // 1
     ["KByte", 1_000n],                      // 1 × 10³
     ["MByte", 1_000_000n],                  // 1 × 10⁶
@@ -68,7 +68,7 @@ export const SI_BYTES = new Map<SI_Units, bigint>([
     ["EByte", 1_000_000_000_000_000_000n],  // 1 × 10¹⁸
 ]);
 
-export const byteSizeTable = new Map<Prefixes, bigint>([
+export const byteSizeTable: ReadonlyMap<Prefixes, bigint> = new Map([
     // SI units
     ["b", SI_BYTES.get("Byte")!],
     ["kb", SI_BYTES.get("KByte")!],

@@ -11,7 +11,7 @@ function logn(n: number, base: number): number {
 function countDigits(n: number): number {
     let digits = 0;
     while (n != 0) {
-        n /= 10;
+        n = Math.floor(n / 10);
         digits += 1;
     }
     return digits;
@@ -20,14 +20,16 @@ function countDigits(n: number): number {
 function humanateBytes(bytes: number, base: number, minDigits: number, sizes: string[]): string {
     if (bytes < 10) return `${bytes} B`;
 
-    const exp: number = Math.floor(logn(bytes, base));
-    const suffix: string = sizes[exp]!;
-    const rounding: number = Math.pow(10, minDigits - 1);
-    const value: number = Math.floor(bytes / Math.pow(base, exp) * rounding + 0.5) / rounding;
-    let digits: number = minDigits - countDigits(value);
+    const exp = Math.floor(logn(bytes, base));
+    const suffix = sizes[exp]!;
+    const rounding = Math.pow(10, minDigits - 1);
+    const raw = bytes / Math.pow(base, exp);
+    const val = Math.floor(raw * rounding + 0.5) / rounding;
 
-    if (digits < 0) digits = 0;
-    return `${value} ${suffix}`;
+    const digits = minDigits - countDigits(Math.floor(val));
+    const decimals = digits < 0 ? 0 : digits;
+    const formatted = val.toFixed(decimals);
+    return `${formatted} ${suffix}`;
 }
 
 /**
