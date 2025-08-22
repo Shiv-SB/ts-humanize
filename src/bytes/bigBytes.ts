@@ -57,16 +57,52 @@ function humanateBigBytes(bytes: bigint, base: bigint, sizes: string[]): string 
     return `${val.toLocaleString(undefined, { maximumFractionDigits: 0, useGrouping: false })} ${suffix}`;
 }
 
+/**
+ * Produces a human-readable representation of a large SI size using BigInt.
+ *
+ * See also: parseBigBytes.
+ * 
+ * @example
+ * bigBytes(82854982000000n) // "83 TB"
+ * @export
+ * @param {bigint} bytes 
+ * @returns {string} 
+ */
 export function bigBytes(bytes: bigint): string {
     const sizes = ["B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "RB", "QB"];
     return humanateBigBytes(bytes, SI_exp, sizes);
 }
 
+/**
+ * Produces a human-readable representation of a large IEC size using BigInt.
+ *
+ * See also: parseBigBytes.
+ * 
+ * @example
+ * bigIBytes(82854982000000n) // "75 TiB"
+ * @export
+ * @param {bigint} bytes 
+ * @returns {string} 
+ */
 export function bigIBytes(bytes: bigint): string {
     const sizes = ["B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB", "RiB", "QiB"];
     return humanateBigBytes(bytes, IECE_exp, sizes);
 }
 
+/**
+ * Parses a string representation of big bytes into the number of bytes it represents as BigInt.
+ *
+ * Will return `undefined` if unable to parse bytes.
+ * 
+ * See also: bigBytes, bigIBytes
+ * 
+ * @example
+ * parseBigBytes("42 MB") // 42000000n
+ * parseBigBytes("42 mib") // 44040192n
+ * @export
+ * @param {string} bytes 
+ * @returns {(bigint | undefined)}
+ */
 export function parseBigBytes(bytes: string): bigint | undefined {
     const len = bytes.length;
     let lastDigit = 0;
