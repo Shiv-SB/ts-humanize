@@ -1,5 +1,21 @@
 import { siPrefixTable, type SI_PREFIXES } from "../units/SI.units";
 
+/**
+ * Finds the most appropriate SI prefix for the given number
+ * and returns the prefix along with the value adjusted to be within
+ * that prefix
+ * 
+ * Will round to 6 decimal places.
+ * 
+ * See also: SI, parseSI
+ * 
+ * @example
+ * computeSI(2.2345e-12) // [2.2345, "p"]
+ *
+ * @export
+ * @param {number} input 
+ * @returns {[number, SI_PREFIXES]} 
+ */
 export function computeSI(input: number): [number, SI_PREFIXES] {
     if (input === 0) return [0, ""];
 
