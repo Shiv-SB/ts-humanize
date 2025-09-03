@@ -2,6 +2,10 @@
   "name": "ts-humanize",
   "module": "src/index.ts",
   "type": "module",
+  "scripts": {
+    "lint": "bunx tsc --noEmit",
+    "compile": "bun scripts/build.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },

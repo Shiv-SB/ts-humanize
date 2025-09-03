@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { computeSI } from '../src/SI-Units/si';
+import { computeSI } from '../src/SI-Units/SI';
 import type { SI_PREFIXES } from '../src/units/SI.units';
 
 describe("computeSI", () => {
