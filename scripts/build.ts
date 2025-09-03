@@ -45,6 +45,26 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
     const exportStrings: string[] = [];
 
     for await (const file of glob.scan("./src")) {
+        // TODO: clean up and move index generation to seperate script
+        /*
+        TODO: Add a script to update package.json to have something like:
+            "main": "build/index.js",
+            "types": "build/index.d.ts",
+            "exports": {
+                ".": {
+                    "import": "./build/index.js",
+                    "types": "./build/index.d.ts"
+                },
+                "./bytes": {
+                    "import": "./build/bytes/index.js",
+                    "types": "./build/bytes/index.d.ts"
+                },
+                "./time": {
+                    "import": "./build/time/index.js",
+                    "types": "./build/time/index.d.ts"
+                }
+            }
+        */
         if (unitGlob.match(file)) continue;
 
         if (file === "index.ts") continue;
