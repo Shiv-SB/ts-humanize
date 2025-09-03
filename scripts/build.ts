@@ -49,8 +49,9 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
     const result = await Bun.build({
         entrypoints: fullPaths,
         outdir: "build",
-        sourcemap: "linked",
-        minify: true,
+        minify: false,
+        // TODO: Remove ignore when Bun types is patched
+        //@ts-ignore bug in Bun types. Should be patched in >1.2.21
         splitting: true,
     });
 
