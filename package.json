@@ -1,11 +1,16 @@
 {
   "name": "ts-humanize",
+  "version": "0.1.0",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
     "lint": "bunx tsc --noEmit",
-    "compile": "bun scripts/build.ts"
+    "compile": "bun scripts/build.ts",
+    "prepublish": "bun compile"
   },
+  "files": [
+    "build"
+  ],
   "devDependencies": {
     "@types/bun": "latest"
   },
