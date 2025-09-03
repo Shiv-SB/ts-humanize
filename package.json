@@ -24,9 +24,9 @@
   "repository": {
     "type": "github"
   },
-  "homepage": "https://github.com/shiv/ts-humanize#readme",
+  "homepage": "https://github.com/shiv-SB/ts-humanize",
   "bugs": {
-    "url": "https://github.com/shiv/ts-humanize/issues"
+    "url": "https://github.com/shiv-SB/ts-humanize/issues"
   },
   "devDependencies": {
     "@types/bun": "latest"
