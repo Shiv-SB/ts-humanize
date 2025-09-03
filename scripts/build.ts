@@ -1,13 +1,13 @@
 import { Glob } from "bun";
 import path from "node:path";
 import { watch } from "fs/promises";
+import fs from "node:fs/promises";
 
 // root dir without trailing slash
 const root = path.resolve(import.meta.dir, "..");
 const glob = new Glob("**/*.ts");
 const unitGlob = new Glob("**/*.units.ts");
 const args = Bun.argv.slice(2);
-const fullPaths: string[] = [];
 
 function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log") {
     const c = Bun.color(col, "ansi") ?? "";
@@ -40,11 +40,31 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         fileLogging = true,
     } = opts || { };
 
+    const srcFolder = path.resolve(root, "src");
+
+    const fullPaths: string[] = [];
+    const exportStrings: string[] = [];
+
     for await (const file of glob.scan("./src")) {
         if (unitGlob.match(file)) continue;
-        const fullPath = path.resolve(root, "src", file);
+        const fullPath = path.resolve(srcFolder, file);
         fullPaths.push(fullPath);
+
+        // Create barrel file
+        const exportStr = `export * from "./${file}";`;
+        exportStrings.push(exportStr);
     }
+
+    const indexFilePath = path.resolve(srcFolder, "index.ts")
+    const indexFile = Bun.file(indexFilePath);
+
+    if (!await indexFile.exists()) {
+        Bun.write(indexFilePath, "");
+    }
+
+    const finalExportStr = exportStrings.join("\n");
+    await Bun.write(indexFile, finalExportStr);
+
 
     const result = await Bun.build({
         entrypoints: fullPaths,

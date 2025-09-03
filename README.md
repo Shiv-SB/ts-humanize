@@ -68,10 +68,12 @@ Two scripts are used to build files for NPM:
 - Bun's bundler generates `.js` files.
 - TypeScript (`tsc`) generates `.d.ts` files.
 
+The bundler will automatically construct the `src/index.ts` file. 
+
 Run both:
 
 ```shell
-bun prepublish
+bun prepare
 ```
 
 Output is in the `build` directory.

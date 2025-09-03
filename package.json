@@ -1,6 +1,6 @@
 {
   "name": "ts-humanize",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A TypeScript library for humanizing dates, numbers, and other values.",
   "keywords": [
     "humanize",
@@ -11,7 +11,12 @@
     "bytes"
   ],
   "main": "build/index.js",
+  "types": "index.d.ts",
   "type": "module",
+  "exports": {
+    "import": "./build/index.js",
+    "types": "./build/index.d.ts"
+  },
   "files": [
     "build"
   ],
@@ -19,7 +24,7 @@
     "lint": "bunx tsc --noEmit",
     "compile": "bun scripts/build.ts",
     "generate:types": "bunx tsc",
-    "prepublish": "bun compile && bun generate:types"
+    "prepare": "bun compile && bun generate:types"
   },
   "repository": {
     "type": "github"
