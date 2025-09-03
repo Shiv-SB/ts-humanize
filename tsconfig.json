@@ -30,10 +30,6 @@
     
     "outDir": "build"
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "src/**/*.units.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.units.ts"]
 }

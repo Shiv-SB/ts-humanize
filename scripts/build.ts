@@ -42,13 +42,10 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
 
     const srcFolder = path.resolve(root, "src");
 
-    const fullPaths: string[] = [];
     const exportStrings: string[] = [];
 
     for await (const file of glob.scan("./src")) {
         if (unitGlob.match(file)) continue;
-        const fullPath = path.resolve(srcFolder, file);
-        fullPaths.push(fullPath);
 
         if (file === "index.ts") continue;
 
@@ -68,7 +65,7 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
 
 
     const result = await Bun.build({
-        entrypoints: fullPaths,
+        entrypoints: [indexFilePath],
         outdir: "build",
         minify: false,
         // TODO: Remove ignore when Bun types is patched
