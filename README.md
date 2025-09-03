@@ -1,79 +1,94 @@
 # ts-humanize
 
-A TypeScript library heavily inspired by [Go-Humanize](https://github.com/dustin/go-humanize)
-Fully typesafe and build to run in Node, Bun and Browsers!
+A TypeScript library inspired by [Go-Humanize](https://github.com/dustin/go-humanize).  
+Fully type-safe and built to run in Node.js, Bun, and browsers!
 
 ## Installation
 
-To install, just run:
+Install with Bun:
 
 ```shell
 bun add ts-humanize
 ```
 
-or
+Or with npm:
 
 ```shell
-npm add ts-humanize
+npm install ts-humanize
 ```
 
 ## Documentation
 
+Like the original Go-Humanize library, all functionality is provided as standalone functions—no classes or single entry points.  
+This design enables optimal tree-shaking.
+
+Functions are grouped by category (bytes, ordinals, etc).
+
+### Bytes
+
+### Formatting
+
+### Ordinals
+
+### SI Units
+
+### Time
+
 ## Development
 
-All PRs for contributions and fixes are welcome!
 
 This library was built to be developed in Bun. There are Bun specific tools which will not work in Node or Deno (e.g Buns bundler and test runner).
 
 ### Tests
 
-All exported/public functions should have their own tests. All tests should be included in the `tests` folder. To run all tests:
+Run all tests:
 
 ```shell
 bun test
 ```
 
-Buns test runner supports wildcard matching, so you can easily choose which files to run:
+Run specific tests (wildcard matching supported):
 
 ```shell
-bun test bytes # Will run bytes.test.ts
+bun test bytes # Runs bytes.test.ts
 ```
 
-For watch mode:
+Watch mode:
 
 ```shell
-bun test --watch bytes # Will run bytes.test.ts in watch mode
+bun test --watch bytes
 ```
 
-Note that code coverage reporting is enabled by default.
+Code coverage reporting is enabled by default.
 
 ### Building
 
-There are two seperate scripts which run to build the files which get published to NPM.
-The first uses Buns built in Bundler to generate the .js files.
-The second uses tsc to generate the .d.ts files.
+Two scripts are used to build files for NPM:
 
-The following command will run both of these:
+- Bun's bundler generates `.js` files.
+- TypeScript (`tsc`) generates `.d.ts` files.
+
+Run both:
 
 ```shell
 bun prepublish
 ```
 
-The files will be outputted to build.
+Output is in the `build` directory.
 
-To generate just the .js files:
+Generate only `.js` files:
 
 ```shell
 bun compile
 ```
 
-The Bundler can be run in watch mode (This is only a basic watch mode; it will bundle everything on a single file change):
+Bundler watch mode:
 
 ```shell
 bun compile --watch
 ```
 
-To generate just the .d.ts files:
+Generate only `.d.ts` files:
 
 ```shell
 bun generate:types
