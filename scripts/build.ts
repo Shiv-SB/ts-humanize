@@ -50,7 +50,8 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         const fullPath = path.resolve(srcFolder, file);
         fullPaths.push(fullPath);
 
-        // Create barrel file
+        if (file === "index.ts") continue;
+
         const exportStr = `export * from "./${file}";`;
         exportStrings.push(exportStr);
     }
