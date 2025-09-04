@@ -8,7 +8,7 @@
 
 > **bytesN**(`bytes`, `numberOfDigits`): `string`
 
-Defined in: [bytes/bytes.ts:64](https://github.com/Shiv-SB/ts-humanize/blob/e6098dcb907b4be2eadfed4406ac92a00e666b5f/src/bytes/bytes.ts#L64)
+Defined in: [bytes/bytes.ts:64](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/bytes/bytes.ts#L64)
 
 Produces a human-readable representation of an SI size.
 

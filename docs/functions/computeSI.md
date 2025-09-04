@@ -8,7 +8,7 @@
 
 > **computeSI**(`input`): \[`number`, `SI_PREFIXES`\]
 
-Defined in: [SI-Units/SI.ts:18](https://github.com/Shiv-SB/ts-humanize/blob/e6098dcb907b4be2eadfed4406ac92a00e666b5f/src/SI-Units/SI.ts#L18)
+Defined in: [SI-Units/SI.ts:18](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/SI-Units/SI.ts#L18)
 
 Finds the most appropriate SI prefix for the given number
 and returns the prefix along with the value adjusted to be within

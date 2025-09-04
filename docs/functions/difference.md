@@ -8,7 +8,7 @@
 
 > **difference**(`date1`, `date2`, `unit`, `opts?`): `number`
 
-Defined in: [time/time.ts:55](https://github.com/Shiv-SB/ts-humanize/blob/e6098dcb907b4be2eadfed4406ac92a00e666b5f/src/time/time.ts#L55)
+Defined in: [time/time.ts:55](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/time/time.ts#L55)
 
 Calculates the difference between two dates/times in the specified unit.
 
