@@ -80,3 +80,26 @@ export function pluralWord(quantity: number, singular: string, plural?: string):
 export function plural(quantity: number, singular: string, plural?: string): string {
     return `${commify(quantity)} ${pluralWord(quantity, singular, plural)}`;
 }
+
+
+/**
+ * wordSeries converts a list of words into a word series.
+ * 
+ * It returns a string containing all the given words seperated by commas,
+ * the coordinating conjuction, and a serial comma, as appropriate.
+ *
+ * @param {string[]} words 
+ * @param {string} conjuction 
+ * @returns {string} 
+ */
+export function wordSeries(words: string[], conjuction: string): string {
+    const len = words.length;
+    switch (len) {
+        case 0:
+            return ""
+        case 1:
+            return words[0]!;
+        default:
+            return `${words.slice(undefined, len - 1).join(", ")} ${conjuction} ${words.at(-1)}`;
+    }
+}
