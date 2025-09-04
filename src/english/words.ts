@@ -1,3 +1,5 @@
+import { commify } from "../formatting";
+
 /**
  * These are included because they are common techincal terms.
  *
@@ -61,5 +63,20 @@ export function pluralWord(quantity: number, singular: string, plural?: string):
     }
 
     return `${singular}s`;
+}
 
+
+/**
+ * plural formats an integer and a string into a single pluralized string.
+ * 
+ * The simple English rules of regular pluralization will be used
+ * if the plural form is empty/undefined.
+ *
+ * @param {number} quantity 
+ * @param {string} singular 
+ * @param {string} plural 
+ * @returns {string}
+ */
+export function plural(quantity: number, singular: string, plural?: string): string {
+    return `${commify(quantity)} ${pluralWord(quantity, singular, plural)}`;
 }

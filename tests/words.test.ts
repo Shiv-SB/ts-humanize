@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { pluralWord } from "../src/english/words";
+import { plural, pluralWord } from "../src/english/words";
 
 describe("pluralWord", () => {
     const testlist: [number, string, string | undefined, string][] = [
@@ -24,11 +24,25 @@ describe("pluralWord", () => {
         // ending with "y" proceded by a consonant
         [2, "lady", undefined, "ladies"],
         [2, "day", undefined, "days"],
-
     ];
 
     test.each(testlist)("%p number(s) of %p with optional plural %p should result in %p", (quant, sing, plural, want) =>{
         const result = pluralWord(quant, sing, plural);
         expect(result).toBe(want);
+    });
+});
+
+describe("plural", () => {
+    const testList: [number, string, string | undefined, string][] = [
+        [1, "object", "", "1 object"],
+        [42, "object", "", "42 objects"],
+        [1234567, "object", "", "1,234,567 objects"],
+
+    ];
+
+    test.each(testList)("%p number of %p with optional plural %p should result in %p", (quant, sing, plu, want) => {
+        const result = plural(quant, sing, plu);
+        expect(result).toBe(want);
+
     });
 });
