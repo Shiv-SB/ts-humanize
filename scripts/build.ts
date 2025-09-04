@@ -1,13 +1,16 @@
 import { Glob } from "bun";
 import path from "node:path";
 import { watch } from "fs/promises";
-import data from "../package.json";
+import packageJSON from "../package.json";
 
 const rootFolder = path.resolve(import.meta.dir, "..");
 const indexFilePath = path.resolve(rootFolder, "src", "index.ts");
 const glob = new Glob("**/*.ts");
 const unitGlob = new Glob("**/*.units.ts");
 const args = Bun.argv.slice(2);
+
+const barrelFiles: ReadonlyArray<string> = await getBarrelFiles();
+const fileMap = getParentFoldersFromFiles(barrelFiles);
 
 function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log") {
     const c = Bun.color(col, "ansi") ?? "";
@@ -33,6 +36,36 @@ if (args[0] === "--watch") {
     await build();
 }
 
+function changeFileExt(fileName: string, newExtWithoutDot: string): string {
+    const parts = fileName.split(".");
+    parts.pop();
+    parts.push(newExtWithoutDot);
+    return parts.join(".");
+}
+
+/**
+ * Return a map of the folder name and array of child files
+ *
+ * @param {string[]} files 
+ * @returns {Map<string, string[]>} 
+ */
+function getParentFoldersFromFiles(files: ReadonlyArray<string>): ReadonlyMap<string, string[]> {
+    const folders: Set<string> = new Set();
+    const output: Map<string, string[]> = new Map();
+    for (const file of files) {
+        const folder = path.dirname(file);
+        folders.add(folder);
+    }
+    for (const folder of folders) {
+        const matchingFiles = files.filter((file) => {
+            const rootFolderFromFile = file.split("/")[0];
+            return rootFolderFromFile === folder;
+        });
+        output.set(folder, matchingFiles);
+    }
+    return output;
+}
+
 async function getBarrelFiles(): Promise<string[]> {
     const files: string[] = [];
     for await (const file of glob.scan("./src")) {
@@ -43,14 +76,76 @@ async function getBarrelFiles(): Promise<string[]> {
     return files;
 }
 
-async function generateIndexTsFile(): Promise<void> {
-    const barrelFiles = await getBarrelFiles();
-    const exportString: string = barrelFiles.map((name) => `export * from "./${name}"`).join("\n");
-    const indexFile = Bun.file(indexFilePath);
-    await Bun.write(indexFile, exportString);
+async function generateEntryPointFile(): Promise<void> {
+    const exportStrings: string[] = [];
+
+    fileMap.forEach((_files, folder) => {
+        const exportStr = `export * from "./${folder}/index.js";`;
+        exportStrings.push(exportStr);
+    });
+
+    const exportString = exportStrings.join(`\n`);
+    await Bun.write(indexFilePath, exportString);
+}
+
+async function generateIndexFiles(): Promise<void> {
+    const srcFolder = path.resolve(rootFolder, "src");
+
+    fileMap.forEach(async (files, folder) => {
+        const indexFilePath = path.resolve(srcFolder, folder, "index.ts");
+        const exportStrings: string[] = [];
+        for (const file of files) {
+            if (file.endsWith("index.ts")) continue;
+            const fileName = path.basename(file);
+            const exportStr = `export * from "./${fileName}"`; 
+            exportStrings.push(exportStr);
+        }
+        const exportStrFinal = exportStrings.join("\n");
+        await Bun.write(indexFilePath, exportStrFinal);
+    });
+    
+
 }
 
 async function updatePackageJSON() {
+    const existingFile = packageJSON;
+    const folders: Set<string> = new Set();
+    const files: string[] = [];
+    const newExportsObj: Record<string, { import: `${string}.js`; types: `${string}.d.ts` }> = {
+        ".": {
+            import: "./build/index.js",
+            types: "./build.index.d.ts"
+        }
+    }
+
+    for (const file of barrelFiles) {
+        const folder = path.dirname(file);
+        folders.add(folder);
+        files.push(file);
+    }
+
+    for (const folder of folders) {
+        const relFolderPath = `./${folder}`;
+        const matchingFiles = files.filter((file) => {
+            const rootFolderFromFile = file.split("/")[0];
+            return rootFolderFromFile === folder;
+        });
+
+        console.table(folder, matchingFiles);
+
+        newExportsObj[relFolderPath] = {
+            import: `./build/${folder}/index.js`,
+            types: `./build/${folder}/index.d.ts`,
+        }
+    }
+
+    const newFileContents = {
+        ...existingFile,
+        exports: newExportsObj
+    };
+
+    console.log(newFileContents);
+    //await Bun.write(path.resolve(rootFolder, "package.json"), JSON.stringify(newFileContents));
 }
 
 async function build(opts?: { fileLogging: boolean }): Promise<void> {
@@ -81,15 +176,26 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         }
     */
 
-    await generateIndexTsFile();
+    await generateEntryPointFile();
+
+    await generateIndexFiles();
+
+    await updatePackageJSON();
+
+    const entryFiles = barrelFiles.map((name) => {
+        return path.resolve(rootFolder, "src", name);
+    });
+
+    entryFiles.push(path.resolve(rootFolder, "src", "index.ts"));
 
     const result = await Bun.build({
-        entrypoints: [indexFilePath],
+        entrypoints: entryFiles,
         outdir: "build",
         minify: false,
+        root: path.resolve(rootFolder, "src"),
         // TODO: Remove ignore when Bun types is patched
         //@ts-ignore bug in Bun types. Should be patched in >1.2.21
-        splitting: true,
+        //splitting: true,
     });
 
     if (!result.success) {
@@ -102,9 +208,10 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         if (fileLogging) {
             console.log("Built files:");
             for (const file of result.outputs) {
-                printC("green", ` > ${file.path.split("/").pop()}`);
+                printC("green", ` > ${path.basename(file.path)}`);
             }
         }
     }
 }
 
+// TODO: write file verification function
