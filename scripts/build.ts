@@ -20,24 +20,6 @@ function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log"
     console[lvl](`${c}${data}${r}`);
 }
 
-if (args[0] === "--watch") {
-    console.log("Running in watch mode...");
-    const srcFolder = path.resolve(rootFolder, "src");
-
-    const watcher = watch(srcFolder, { recursive: true });
-
-    for await (const event of watcher) {
-        printC("cyan", `    ${event.eventType} in ${event.filename}`);
-        await build({ fileLogging: false });
-    }
-
-    process.on("SIGINT", () => {
-        process.exit(0);
-    });
-} else {
-    await build();
-}
-
 function changeFileExt(fileName: string, newExtWithoutDot: string): string {
     const parts = fileName.split(".");
     parts.pop();
@@ -99,10 +81,10 @@ async function generateIndexFiles(): Promise<void> {
         for (const file of files) {
             if (file.endsWith("index.ts")) continue;
             const fileName = path.basename(file);
-            const exportStr = `export * from "./${fileName}"`; 
+            const exportStr = `export * from "./${fileName}"`;
             exportStrings.push(exportStr);
         }
-        
+
         const exportStrFinal = exportStrings.join("\n");
         await Bun.write(indexFilePath, exportStrFinal);
     });
@@ -127,12 +109,6 @@ async function updatePackageJSON() {
 
     for (const folder of folders) {
         const relFolderPath = `./${folder}`;
-        const matchingFiles = files.filter((file) => {
-            const rootFolderFromFile = file.split("/")[0];
-            return rootFolderFromFile === folder;
-        });
-
-        console.table(folder, matchingFiles);
 
         newExportsObj[relFolderPath] = {
             import: `./build/${folder}/index.js`,
@@ -145,7 +121,6 @@ async function updatePackageJSON() {
         exports: newExportsObj
     };
 
-    console.log(newFileContents);
     await Bun.write(path.resolve(rootFolder, "package.json"), JSON.stringify(newFileContents, null, 4));
 }
 
@@ -214,5 +189,27 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         }
     }
 }
+
+async function main() {
+    if (args[0] === "--watch") {
+        console.log("Running in watch mode...");
+        const srcFolder = path.resolve(rootFolder, "src");
+
+        const watcher = watch(srcFolder, { recursive: true });
+
+        for await (const event of watcher) {
+            printC("cyan", `    ${event.eventType} in ${event.filename}`);
+            await build({ fileLogging: false });
+        }
+
+        process.on("SIGINT", () => {
+            process.exit(0);
+        });
+    } else {
+        await build();
+    }
+}
+
+await main();
 
 // TODO: write file verification function
