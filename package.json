@@ -1,45 +1,67 @@
 {
-  "name": "ts-humanize",
-  "version": "0.2.2",
-  "description": "A TypeScript library for humanizing dates, numbers, and other values.",
-  "keywords": [
-    "humanize",
-    "typescript",
-    "dates",
-    "numbers",
-    "library",
-    "bytes"
-  ],
-  "main": "build/index.js",
-  "types": "index.d.ts",
-  "type": "module",
-  "exports": {
-    "import": "./build/index.js",
-    "types": "./build/index.d.ts"
-  },
-  "files": [
-    "build"
-  ],
-  "scripts": {
-    "lint": "bunx tsc --noEmit",
-    "compile": "bun scripts/build.ts",
-    "generate:types": "bunx tsc",
-    "prepare": "bun compile && bun generate:types"
-  },
-  "repository": {
-    "type": "github"
-  },
-  "homepage": "https://github.com/shiv-SB/ts-humanize",
-  "bugs": {
-    "url": "https://github.com/shiv-SB/ts-humanize/issues"
-  },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.9.2"
-  },
-  "dependencies": {
-    "dayjs": "^1.11.18"
-  }
+    "name": "ts-humanize",
+    "version": "0.2.2",
+    "description": "A TypeScript library for humanizing dates, numbers, and other values.",
+    "keywords": [
+        "humanize",
+        "typescript",
+        "dates",
+        "numbers",
+        "library",
+        "bytes"
+    ],
+    "main": "build/index.js",
+    "types": "index.d.ts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./build/index.js",
+            "types": "./build.index.d.ts"
+        },
+        "./formatting": {
+            "import": "./build/formatting/index.js",
+            "types": "./build/formatting/index.d.ts"
+        },
+        "./time": {
+            "import": "./build/time/index.js",
+            "types": "./build/time/index.d.ts"
+        },
+        "./SI-Units": {
+            "import": "./build/SI-Units/index.js",
+            "types": "./build/SI-Units/index.d.ts"
+        },
+        "./ordinals": {
+            "import": "./build/ordinals/index.js",
+            "types": "./build/ordinals/index.d.ts"
+        },
+        "./bytes": {
+            "import": "./build/bytes/index.js",
+            "types": "./build/bytes/index.d.ts"
+        }
+    },
+    "files": [
+        "build"
+    ],
+    "scripts": {
+        "lint": "bunx tsc --noEmit",
+        "compile": "bun scripts/build.ts",
+        "generate:types": "bunx tsc",
+        "prepare": "bun compile && bun generate:types"
+    },
+    "repository": {
+        "type": "github"
+    },
+    "homepage": "https://github.com/shiv-SB/ts-humanize",
+    "bugs": {
+        "url": "https://github.com/shiv-SB/ts-humanize/issues"
+    },
+    "devDependencies": {
+        "@types/bun": "latest"
+    },
+    "peerDependencies": {
+        "typescript": "^5.9.2"
+    },
+    "dependencies": {
+        "dayjs": "^1.11.18"
+    }
 }

@@ -12,6 +12,8 @@ const args = Bun.argv.slice(2);
 const barrelFiles: ReadonlyArray<string> = await getBarrelFiles();
 const fileMap = getParentFoldersFromFiles(barrelFiles);
 
+const exportMessage = `// This file is generated automatically. See README or scripts/build.ts for more details.`;
+
 function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log") {
     const c = Bun.color(col, "ansi") ?? "";
     const r = "\x1b[0m"
@@ -77,7 +79,7 @@ async function getBarrelFiles(): Promise<string[]> {
 }
 
 async function generateEntryPointFile(): Promise<void> {
-    const exportStrings: string[] = [];
+    const exportStrings: string[] = [exportMessage];
 
     fileMap.forEach((_files, folder) => {
         const exportStr = `export * from "./${folder}/index.js";`;
@@ -93,18 +95,17 @@ async function generateIndexFiles(): Promise<void> {
 
     fileMap.forEach(async (files, folder) => {
         const indexFilePath = path.resolve(srcFolder, folder, "index.ts");
-        const exportStrings: string[] = [];
+        const exportStrings: string[] = [exportMessage];
         for (const file of files) {
             if (file.endsWith("index.ts")) continue;
             const fileName = path.basename(file);
             const exportStr = `export * from "./${fileName}"`; 
             exportStrings.push(exportStr);
         }
+        
         const exportStrFinal = exportStrings.join("\n");
         await Bun.write(indexFilePath, exportStrFinal);
     });
-    
-
 }
 
 async function updatePackageJSON() {
@@ -145,7 +146,7 @@ async function updatePackageJSON() {
     };
 
     console.log(newFileContents);
-    //await Bun.write(path.resolve(rootFolder, "package.json"), JSON.stringify(newFileContents));
+    await Bun.write(path.resolve(rootFolder, "package.json"), JSON.stringify(newFileContents, null, 4));
 }
 
 async function build(opts?: { fileLogging: boolean }): Promise<void> {
