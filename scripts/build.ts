@@ -4,7 +4,8 @@ import { watch } from "fs/promises";
 import packageJSON from "../package.json";
 
 const rootFolder = path.resolve(import.meta.dir, "..");
-const indexFilePath = path.resolve(rootFolder, "src", "index.ts");
+const srcFolder = path.resolve(rootFolder, "src");
+const indexFilePath = path.resolve(srcFolder, "index.ts");
 const glob = new Glob("**/*.ts");
 const unitGlob = new Glob("**/*.units.ts");
 const args = Bun.argv.slice(2);
@@ -66,8 +67,6 @@ async function generateEntryPointFile(): Promise<void> {
 }
 
 async function generateIndexFiles(): Promise<void> {
-    const srcFolder = path.resolve(rootFolder, "src");
-
     fileMap.forEach(async (files, folder) => {
         const indexFilePath = path.resolve(srcFolder, folder, "index.ts");
         const exportStrings: string[] = [exportMessage];
@@ -124,27 +123,6 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         fileLogging = true,
     } = opts || {};
 
-    // TODO: clean up and move index generation to seperate script
-    /*
-    TODO: Add a script to update package.json to have something like:
-        "main": "build/index.js",
-        "types": "build/index.d.ts",
-        "exports": {
-            ".": {
-                "import": "./build/index.js",
-                "types": "./build/index.d.ts"
-            },
-            "./bytes": {
-                "import": "./build/bytes/index.js",
-                "types": "./build/bytes/index.d.ts"
-            },
-            "./time": {
-                "import": "./build/time/index.js",
-                "types": "./build/time/index.d.ts"
-            }
-        }
-    */
-
     await generateEntryPointFile();
 
     await generateIndexFiles();
@@ -152,16 +130,16 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
     await updatePackageJSON();
 
     const entryFiles = barrelFiles.map((name) => {
-        return path.resolve(rootFolder, "src", name);
+        return path.resolve(srcFolder, name);
     });
 
-    entryFiles.push(path.resolve(rootFolder, "src", "index.ts"));
+    entryFiles.push(indexFilePath);
 
     const result = await Bun.build({
         entrypoints: entryFiles,
         outdir: "build",
         minify: false,
-        root: path.resolve(rootFolder, "src"),
+        root: srcFolder,
         // TODO: Remove ignore when Bun types is patched
         //@ts-ignore bug in Bun types. Should be patched in >1.2.21
         //splitting: true,
@@ -186,7 +164,6 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
 async function main() {
     if (args[0] === "--watch") {
         console.log("Running in watch mode...");
-        const srcFolder = path.resolve(rootFolder, "src");
 
         const watcher = watch(srcFolder, { recursive: true });
 

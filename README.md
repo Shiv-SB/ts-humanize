@@ -36,8 +36,10 @@ Functions are grouped by category (bytes, ordinals, etc).
 
 ## Development
 
-
 This library was built to be developed in Bun. There are Bun specific tools which will not work in Node or Deno (e.g Buns bundler and test runner).
+
+If you are creating a new public function, it must be organised into the the relevant folder. 
+For example, let say there is a new exported `parseFloat` function. This will go in a new file `src/numbers/number.ts`. TBD
 
 ### Tests
 
