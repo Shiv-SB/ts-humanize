@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { plural, pluralWord, wordSeries } from "../src/english/words";
+import { oxfordWordSeries, plural, pluralWord, wordSeries } from "../src/english/words";
 
 describe("pluralWord", () => {
     const testlist: [number, string, string | undefined, string][] = [
@@ -49,6 +49,7 @@ describe("plural", () => {
 
 describe("wordSeries", () => {
     const testList: [string[], string, string][] = [
+        [[], "and", ""],
         [[""], "and", ""],
         [["foo"], "and", "foo"],
         [["foo", "bar"], "and", "foo and bar"],
@@ -58,6 +59,21 @@ describe("wordSeries", () => {
     
     test.each(testList)("list %p with conjuction %p should result in %p", (list, conj, want) => {
         const result = wordSeries(list, conj);
+        expect(result).toBe(want);
+    });
+});
+
+describe("oxfordWordSeries", () => {
+    const testList: [string[], string, string][] = [
+        [[], "and", ""],
+        [[""], "and", ""],
+        [["foo"], "and", "foo"],
+        [["foo", "bar"], "and", "foo and bar"],
+        [["foo", "bar", "baz"], "and", "foo, bar and baz"],
+        [["foo", "bar", "baz"], "or", "foo, bar or baz"],
+    ];
+    test.each(testList)("list %p with conjuction %p should result in %p", (list, conj, want) => {
+        const result = oxfordWordSeries(list, conj);
         expect(result).toBe(want);
     });
 });

@@ -88,6 +88,8 @@ export function plural(quantity: number, singular: string, plural?: string): str
  * It returns a string containing all the given words seperated by commas,
  * the coordinating conjuction, and a serial comma, as appropriate.
  *
+ * See also: oxfordWordSeries
+ * 
  * @param {string[]} words 
  * @param {string} conjuction 
  * @returns {string} 
@@ -103,3 +105,30 @@ export function wordSeries(words: string[], conjuction: string): string {
             return `${words.slice(undefined, len - 1).join(", ")} ${conjuction} ${words.at(-1)}`;
     }
 }
+
+
+/**
+ * oxfordWordSeries converts a list of words into a word series using
+ * an Oxford comma (https://en.wikipedia.org/wiki/Serial_comma).
+ * 
+ * It returns a string containing all the given words seperated by commas,
+ * the coordinating conjuction, and a serial comma, as appropriate.
+ *
+ * @param {string[]} words 
+ * @param {string} conjuction 
+ * @returns {string} 
+ */
+export function oxfordWordSeries(words: string[], conjuction: string): string {
+    const len = words.length;
+    switch (len) {
+        case 0:
+            return "";
+        case 1:
+            return words[0]!;
+        case 2:
+            return `${words.join(` ${conjuction} `)}`;
+        default:
+            return `${words.slice(undefined, len - 1).join(", ")} ${conjuction} ${words.at(-1)}`;
+    }
+}
+
