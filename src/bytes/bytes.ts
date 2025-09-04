@@ -39,7 +39,6 @@ function humanateBytes(bytes: number, base: number, minDigits: number, sizes: st
  * 
  * @example
  * bytes(82854982) // "83 MB"
- * @export
  * @param {number} bytes 
  * @returns {string} 
  */
@@ -58,7 +57,6 @@ export function bytes(bytes: number): string {
  * @example
  * bytesN(82854982, 3) // "82.9 MB"
  * bytesN(82854982, 4) // "82.85 MB"
- * @export
  * @param {number} bytes 
  * @param {number} numberOfDigits Specifies the total number of digits to output, including the decimal part.
  * @returns {string} 
@@ -75,7 +73,6 @@ export function bytesN(bytes: number, numberOfDigits: number): string {
  * 
  * @example
  * iBytes(82854982) // "79 MiB"
- * @export
  * @param {number} bytes 
  * @returns {string} 
  */
@@ -95,7 +92,6 @@ export function iBytes(bytes: number): string {
  * IBytesN(82854982, 4) // "79.02 MiB"
  * IBytesN(123456789, 3) // "118 MiB"
  * IBytesN(123456789, 6) // "117.738 MiB"
- * @export
  * @param {number} bytes 
  * @param {number} numberOfDigits Specifies the total number of digits to output, including the decimal part.
  * @returns {string} 
@@ -115,7 +111,6 @@ export function iBytesN(bytes: number, numberOfDigits: number): string {
  * @example
  * parseBytes("42 MB") // 42000000
  * parseBytes("42 mib") // 44040192
- * @export
  * @param {string} bytes 
  * @returns {(number | undefined)}
  */

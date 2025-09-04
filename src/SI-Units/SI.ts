@@ -12,7 +12,6 @@ import { siPrefixTable, type SI_PREFIXES } from "../units/SI.units";
  * @example
  * computeSI(2.2345e-12) // [2.2345, "p"]
  *
- * @export
  * @param {number} input 
  * @returns {[number, SI_PREFIXES]} 
  */

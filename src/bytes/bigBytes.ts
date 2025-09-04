@@ -64,7 +64,6 @@ function humanateBigBytes(bytes: bigint, base: bigint, sizes: string[]): string 
  * 
  * @example
  * bigBytes(82854982000000n) // "83 TB"
- * @export
  * @param {bigint} bytes 
  * @returns {string} 
  */
@@ -80,7 +79,6 @@ export function bigBytes(bytes: bigint): string {
  * 
  * @example
  * bigIBytes(82854982000000n) // "75 TiB"
- * @export
  * @param {bigint} bytes 
  * @returns {string} 
  */
@@ -99,7 +97,6 @@ export function bigIBytes(bytes: bigint): string {
  * @example
  * parseBigBytes("42 MB") // 42000000n
  * parseBigBytes("42 mib") // 44040192n
- * @export
  * @param {string} bytes 
  * @returns {(bigint | undefined)}
  */
