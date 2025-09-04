@@ -20,13 +20,6 @@ function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log"
     console[lvl](`${c}${data}${r}`);
 }
 
-function changeFileExt(fileName: string, newExtWithoutDot: string): string {
-    const parts = fileName.split(".");
-    parts.pop();
-    parts.push(newExtWithoutDot);
-    return parts.join(".");
-}
-
 /**
  * Return a map of the folder name and array of child files
  *

@@ -45,7 +45,7 @@
     "scripts": {
         "lint": "bunx tsc --noEmit",
         "compile": "bun scripts/build.ts",
-        "generate:types": "bunx tsc",
+        "generate:types": "bunx tsc --p tsconfig.build.json",
         "prepare": "bun compile && bun generate:types"
     },
     "repository": {
