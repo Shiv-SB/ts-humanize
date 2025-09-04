@@ -1,4 +1,4 @@
-[**ts-humanize v0.2.2**](../README.md)
+[**ts-humanize v0.3.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **iBytesN**(`bytes`, `numberOfDigits`): `string`
 
-Defined in: [bytes/bytes.ts:99](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/bytes/bytes.ts#L99)
+Defined in: [bytes/bytes.ts:99](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/bytes/bytes.ts#L99)
 
 Produces a human-readable representation of an IEC size.
 

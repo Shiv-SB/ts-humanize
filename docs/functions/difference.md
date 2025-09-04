@@ -1,4 +1,4 @@
-[**ts-humanize v0.2.2**](../README.md)
+[**ts-humanize v0.3.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **difference**(`date1`, `date2`, `unit`, `opts?`): `number`
 
-Defined in: [time/time.ts:55](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/time/time.ts#L55)
+Defined in: [time/time.ts:55](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/time/time.ts#L55)
 
 Calculates the difference between two dates/times in the specified unit.
 

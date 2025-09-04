@@ -1,4 +1,4 @@
-[**ts-humanize v0.2.2**](../README.md)
+[**ts-humanize v0.3.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **parseBytes**(`bytes`): `undefined` \| `number`
 
-Defined in: [bytes/bytes.ts:117](https://github.com/Shiv-SB/ts-humanize/blob/58c6d39c670b3b3862b4035998e27d57f6c37c48/src/bytes/bytes.ts#L117)
+Defined in: [bytes/bytes.ts:117](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/bytes/bytes.ts#L117)
 
 Parses a string representation of bytes into the number of bytes it represents.
 
