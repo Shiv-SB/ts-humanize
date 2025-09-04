@@ -17,29 +17,41 @@ Or with npm:
 npm install ts-humanize
 ```
 
-## Documentation
+## Usage
+
+Several import syntaxes can be used.
+
+For example, to import `parseBytes`:
+
+```typescript
+// ESM, top level:
+import { parseBytes } from "ts-humanize";
+// or
+// ESM, subpath:
+import { parseBytes } from "ts-humanize/bytes";
+// or
+// CommonJS:
+const { parseBytes } = require("ts-humanize");
+// or
+// ESM, namespace import
+import * as humanize from "ts-humanize";
+
+// ...and then:
+parseBytes("42 MB"); // 42000000
+// or
+humanize.parseBytes("42 MB");
+```
+
+## Development
 
 Like the original Go-Humanize library, all functionality is provided as standalone functions—no classes or single entry points.  
 This design enables optimal tree-shaking.
 
 Functions are grouped by category (bytes, ordinals, etc).
 
-### Bytes
-
-### Formatting
-
-### Ordinals
-
-### SI Units
-
-### Time
-
-## Development
+See [Docs](docs/README.md) for full documentation on each function.
 
 This library was built to be developed in Bun. There are Bun specific tools which will not work in Node or Deno (e.g Buns bundler and test runner).
-
-If you are creating a new public function, it must be organised into the the relevant folder. 
-For example, let say there is a new exported `parseFloat` function. This will go in a new file `src/numbers/number.ts`. TBD
 
 ### Tests
 
@@ -65,14 +77,23 @@ Code coverage reporting is enabled by default.
 
 ### Building
 
-Two scripts are used to build files for NPM:
+There are a few scripts are used to build files for NPM:
 
-- Bun's bundler generates `.js` files.
+- Bun's bundler (`/scripts/build.ts`) generates `.js` files.
 - TypeScript (`tsc`) generates `.d.ts` files.
+- [TypeDoc](https://typedoc.org/index.html) is used to auto generate documentation.
 
-The bundler will automatically construct the `src/index.ts` file. 
+The bundler will:
+1. Generate a barrel import file (`src/index.ts`).
+2. Generate `index.ts` files for all folders in `src` except for `/units`.
+3. Transpile the typescript files (using all index.ts files as entrypoints) to `.js` files.
+4. Updates package.json to include all detected `index.js` and `index.d.ts` files for ESM subpath importing.
 
-Run both:
+```typescript
+import { commify } from "ts-humanize/formatting";
+```
+
+To run all build scripts in preperation to publish to NPM:
 
 ```shell
 bun prepare
@@ -96,4 +117,16 @@ Generate only `.d.ts` files:
 
 ```shell
 bun generate:types
+```
+
+Auto generate documentation:
+
+```shell
+bun generate:docs
+```
+
+Run tsc to check for type errors:
+
+```shell
+bun lint
 ```
