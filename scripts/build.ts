@@ -1,10 +1,10 @@
 import { Glob } from "bun";
 import path from "node:path";
 import { watch } from "fs/promises";
-import fs from "node:fs/promises";
+import data from "../package.json";
 
-// root dir without trailing slash
-const root = path.resolve(import.meta.dir, "..");
+const rootFolder = path.resolve(import.meta.dir, "..");
+const indexFilePath = path.resolve(rootFolder, "src", "index.ts");
 const glob = new Glob("**/*.ts");
 const unitGlob = new Glob("**/*.units.ts");
 const args = Bun.argv.slice(2);
@@ -17,7 +17,7 @@ function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log"
 
 if (args[0] === "--watch") {
     console.log("Running in watch mode...");
-    const srcFolder = path.resolve(root, "src");
+    const srcFolder = path.resolve(rootFolder, "src");
 
     const watcher = watch(srcFolder, { recursive: true });
 
@@ -33,56 +33,55 @@ if (args[0] === "--watch") {
     await build();
 }
 
+async function getBarrelFiles(): Promise<string[]> {
+    const files: string[] = [];
+    for await (const file of glob.scan("./src")) {
+        if (unitGlob.match(file)) continue;
+        if (file === "index.ts") continue;
+        files.push(file);
+    }
+    return files;
+}
+
+async function generateIndexTsFile(): Promise<void> {
+    const barrelFiles = await getBarrelFiles();
+    const exportString: string = barrelFiles.map((name) => `export * from "./${name}"`).join("\n");
+    const indexFile = Bun.file(indexFilePath);
+    await Bun.write(indexFile, exportString);
+}
+
+async function updatePackageJSON() {
+}
+
 async function build(opts?: { fileLogging: boolean }): Promise<void> {
     console.time("Build Complete");
     console.log("Building...");
     const {
         fileLogging = true,
-    } = opts || { };
+    } = opts || {};
 
-    const srcFolder = path.resolve(root, "src");
-
-    const exportStrings: string[] = [];
-
-    for await (const file of glob.scan("./src")) {
-        // TODO: clean up and move index generation to seperate script
-        /*
-        TODO: Add a script to update package.json to have something like:
-            "main": "build/index.js",
-            "types": "build/index.d.ts",
-            "exports": {
-                ".": {
-                    "import": "./build/index.js",
-                    "types": "./build/index.d.ts"
-                },
-                "./bytes": {
-                    "import": "./build/bytes/index.js",
-                    "types": "./build/bytes/index.d.ts"
-                },
-                "./time": {
-                    "import": "./build/time/index.js",
-                    "types": "./build/time/index.d.ts"
-                }
+    // TODO: clean up and move index generation to seperate script
+    /*
+    TODO: Add a script to update package.json to have something like:
+        "main": "build/index.js",
+        "types": "build/index.d.ts",
+        "exports": {
+            ".": {
+                "import": "./build/index.js",
+                "types": "./build/index.d.ts"
+            },
+            "./bytes": {
+                "import": "./build/bytes/index.js",
+                "types": "./build/bytes/index.d.ts"
+            },
+            "./time": {
+                "import": "./build/time/index.js",
+                "types": "./build/time/index.d.ts"
             }
-        */
-        if (unitGlob.match(file)) continue;
+        }
+    */
 
-        if (file === "index.ts") continue;
-
-        const exportStr = `export * from "./${file}";`;
-        exportStrings.push(exportStr);
-    }
-
-    const indexFilePath = path.resolve(srcFolder, "index.ts")
-    const indexFile = Bun.file(indexFilePath);
-
-    if (!await indexFile.exists()) {
-        Bun.write(indexFilePath, "");
-    }
-
-    const finalExportStr = exportStrings.join("\n");
-    await Bun.write(indexFile, finalExportStr);
-
+    await generateIndexTsFile();
 
     const result = await Bun.build({
         entrypoints: [indexFilePath],
