@@ -26,6 +26,12 @@ jobs:
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Show Bun revision
+        run: bun --revision
+
+      - name: Show Bun uname
+        run: bun uname -mprs
+
       - name: Validate package.json version matched tag
         run: |
           PACKAGE_VERSION=$(bun pm pkg get version | tr -d '"')
