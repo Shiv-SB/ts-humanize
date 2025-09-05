@@ -48,7 +48,6 @@ jobs:
       - name: Audit vulnerabilities
         run: bun audit
 
-
       - name: Use tsc to check for type safety
         run: bun lint
 
