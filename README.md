@@ -1,7 +1,20 @@
 # ts-humanize
 
-A TypeScript library inspired by [Go-Humanize](https://github.com/dustin/go-humanize).  
-Fully type-safe and built to run in Node.js, Bun, and browsers!
+[![npm version](https://img.shields.io/npm/v/ts-humanize?color=blue)](https://www.npmjs.com/package/ts-humanize)
+[![npm downloads](https://img.shields.io/npm/dm/ts-humanize.svg?color=brightgreen)](https://www.npmjs.com/package/ts-humanize)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/ts-humanize?label=unpacked%20size)](https://bundlephobia.com/package/ts-humanize)
+
+A modern, fully type-safe TypeScript library for humanizing numbers, sizes, times, and more—  
+inspired very heavily by [Go-Humanize](https://github.com/dustin/go-humanize) and designed for seamless use in Node.js, Bun, and browsers.
+
+**ts-humanize** provides a comprehensive set of standalone utility functions for formatting and parsing data into human-readable strings.  
+It is optimized for tree-shaking, supports ESM and CommonJS, and is suitable for both frontend and backend projects.
+
+- Humanizes file sizes, time intervals, ordinals, numbers, and more
+- Mininal dependencies, lightweight, and fast
+- Works out-of-the-box with Bun, Node.js, and browsers
+- ESM subpath imports for optimal bundle size
+- Written in TypeScript with full type safety
 
 ## Installation
 
