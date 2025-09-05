@@ -27,6 +27,12 @@ export function relativeTime(timeInPast: Date | Dayjs, timeInFuture: Date | Dayj
 }
 
 type DifferenceOpts = {
+    
+    /**
+     * If true, rounds the result to the nearest integer. If false, returns a floating point value. Defaults to true.
+     *
+     * @type {?boolean}
+     */
     roundResult?: boolean;
 }
 
@@ -37,7 +43,6 @@ type DifferenceOpts = {
  * @param date2 - The second date (Date or Dayjs instance).
  * @param unit - The unit of measurement for the difference (e.g., "days", "hours", "ms"). Defaults to "ms".
  * @param opts - Optional settings.
- * @property roundResult - If true, rounds the result to the nearest integer. If false, returns a floating point value. Defaults to true.
  * @returns The difference between date1 and date2 in the specified unit.
  *
  * @example
