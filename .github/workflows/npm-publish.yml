@@ -1,0 +1,62 @@
+name: Publish to NPM
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          version: "latest"
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Validate package.json version matched tag
+        run: |
+          PACKAGE_VERSION=$(bun pkg get version)
+          TAG_VERSION=${{ github.ref_name || github.event.inputs.tag || github.event.release.tag_name. }}
+          if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+            echo "Version mismatch: package.json has $PACKAGE_VERSION but tag is $TAG_VERSION. Run 'bun bump' to increment version"
+            exit 1
+          fi
+          echo "Version matches: $PACKAGE_VERSION"
+          
+      - name: Configure npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Audit vulnerabilities
+        run: bun audit
+
+
+      - name: Use tsc to check for type safety
+        run: bun lint
+
+      - name: Run tests
+        run: bun test
+
+      - name: Build package
+        run: bun run build
+
+      - name: Publish to NPM
+        run: bun publish --dry-run
+
+
+      

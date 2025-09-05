@@ -155,14 +155,10 @@ The bundler will:
 3. Transpile the typescript files (using all index.ts files as entrypoints) to `.js` files.
 4. Updates package.json to include all detected `index.js` and `index.d.ts` files for ESM subpath importing.
 
-```typescript
-import { commify } from "ts-humanize/formatting";
-```
-
-To run all build scripts in preperation to publish to NPM:
+The above is automatically handled in the github workflow config. To run the script manually:
 
 ```shell
-bun prepare
+bun run build
 ```
 
 Output is in the `build` directory.
@@ -176,7 +172,7 @@ bun compile
 Bundler watch mode:
 
 ```shell
-bun compile --watch
+bun run build --watch
 ```
 
 Generate only `.d.ts` files:

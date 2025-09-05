@@ -51,7 +51,8 @@
         "compile": "bun scripts/build.ts",
         "generate:types": "bunx tsc --p tsconfig.build.json",
         "generate:docs": "bunx typedoc",
-        "prepare": "bun compile && bun generate:types && bun generate:docs"
+        "bump": "bun pm version",
+        "build": "bun compile && bun generate:types && bun generate:docs"
     },
     "repository": {
         "type": "github"
