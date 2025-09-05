@@ -56,7 +56,8 @@
         "push": "git push --follow-tags"
     },
     "repository": {
-        "type": "github"
+        "type": "github",
+        "url": "https://github.com/Shiv-SB/ts-humanize"
     },
     "homepage": "https://github.com/shiv-SB/ts-humanize",
     "bugs": {
