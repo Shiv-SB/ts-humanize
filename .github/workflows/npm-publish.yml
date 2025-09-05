@@ -22,7 +22,8 @@ jobs:
 
       - name: Set up Node and NPM
         uses: actions/setup-node@v5
-      - run: npm install -g npm@latest # npm 11.5.1 or later is required for OIDC
+        # using sudo because of https://github.com/actions/setup-node/issues/324#issuecomment-970306807
+      - run: sudo npm install -g npm@latest # npm 11.5.1 or later is required for OIDC
       - run: echo npm version $(npm --version)
 
       - name: Set up Bun
