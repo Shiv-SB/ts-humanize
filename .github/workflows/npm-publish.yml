@@ -25,7 +25,7 @@ jobs:
 
       - name: Validate package.json version matched tag
         run: |
-          PACKAGE_VERSION=$(bun pkg get version)
+          PACKAGE_VERSION=$(bun pm pkg get version)
           TAG_VERSION=${{ github.ref_name || github.event.inputs.tag || github.event.release.tag_name }}
           if [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
             echo "Version mismatch: package.json has $PACKAGE_VERSION but tag is $TAG_VERSION. Run 'bun bump' to increment version"
