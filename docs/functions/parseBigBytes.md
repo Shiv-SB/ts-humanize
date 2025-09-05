@@ -8,7 +8,7 @@
 
 > **parseBigBytes**(`bytes`): `undefined` \| `bigint`
 
-Defined in: [bytes/bigBytes.ts:103](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/bytes/bigBytes.ts#L103)
+Defined in: [bytes/bigBytes.ts:103](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/bytes/bigBytes.ts#L103)
 
 Parses a string representation of big bytes into the number of bytes it represents as BigInt.
 

@@ -8,7 +8,7 @@
 
 > **ordinal**(`x`): `string`
 
-Defined in: [ordinals/ordinals.ts:12](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/ordinals/ordinals.ts#L12)
+Defined in: [ordinals/ordinals.ts:12](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/ordinals/ordinals.ts#L12)
 
 Returns the ordinal representation of a number (e.g., 1st, 2nd, 3rd, 4th).
 

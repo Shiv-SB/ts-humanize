@@ -8,7 +8,7 @@
 
 > **iBytes**(`bytes`): `string`
 
-Defined in: [bytes/bytes.ts:79](https://github.com/Shiv-SB/ts-humanize/blob/919e20c5062ab422c95ea4551ce3ee99cc497132/src/bytes/bytes.ts#L79)
+Defined in: [bytes/bytes.ts:79](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/bytes/bytes.ts#L79)
 
 Produces a human-readable representation of an IEC size.
 
