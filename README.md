@@ -55,7 +55,7 @@ console.log("This file is:", bytes(82854982)); // This file is 83 MB
 #### Times
 
 ```typescript
-import { relativeTime } from "./src";
+import { relativeTime } from "ts-humanize";
 
 function subtractDaysFromDate(date: Date, days: number): Date {
     const pastDate = new Date(date);
@@ -66,6 +66,25 @@ function subtractDaysFromDate(date: Date, days: number): Date {
 const pastDate = subtractDaysFromDate(new Date(), 7);
 console.log("This was modified", relativeTime(pastDate)); // This was modified 7 days ago
 ```
+
+#### Ordinals
+
+```typescript
+import { ordinal } from "ts-humanize";
+
+console.log(`You are my ${ordinal(365)} best friend`); // You are my 365th best friend
+```
+
+#### Commas
+
+```typescript
+import { commify } from "ts-humanize";
+
+console.log(`You owe me £${commify(5_033_482)}`); // You owe me £5,033,482
+// With optional locale and bigint support:
+console.log(commify(1234567n, "de-DE")) // 1.234.567
+```
+
 
 ## Development
 
