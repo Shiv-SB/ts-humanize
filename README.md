@@ -1,8 +1,19 @@
 # ts-humanize
 
-[![npm version](https://img.shields.io/npm/v/ts-humanize?color=blue)](https://www.npmjs.com/package/ts-humanize)
-[![npm downloads](https://img.shields.io/npm/dm/ts-humanize.svg?color=brightgreen)](https://www.npmjs.com/package/ts-humanize)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/ts-humanize?label=unpacked%20size)](https://bundlephobia.com/package/ts-humanize)
+<p align="left">
+  <a href="https://www.npmjs.com/package/ts-humanize">
+    <img src="https://img.shields.io/npm/v/ts-humanize?color=blue" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/ts-humanize">
+    <img src="https://img.shields.io/npm/dm/ts-humanize.svg?color=brightgreen" alt="npm downloads" />
+  </a>
+  <a href="https://bundlephobia.com/package/ts-humanize">
+    <img src="https://img.shields.io/bundlephobia/minzip/ts-humanize?label=unpacked%20size" alt="npm bundle size" />
+  </a>
+  <a href="https://github.com/Shiv-SB/ts-humanize/actions/workflows/npm-publish.yml">
+    <img src="https://github.com/Shiv-SB/ts-humanize/actions/workflows/npm-publish.yml/badge.svg" alt="Publish to NPM" />
+  </a>
+</p>
 
 A modern, fully type-safe TypeScript library for humanizing numbers, sizes, times, and more—  
 inspired very heavily by [Go-Humanize](https://github.com/dustin/go-humanize) and designed for seamless use in Node.js, Bun, and browsers.
