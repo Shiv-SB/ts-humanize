@@ -4,6 +4,10 @@ import { IEC_BYTES, SI_BYTES } from "../src/units/bytes.units";
 
 describe("bigByte Parsing", () => {
     const testValues: [string, bigint][] = [
+		["0.4", 0n],
+		["0.5", 0n],
+		["0.6", 0n],
+		["0.99999999999 B", 0n],
         ["42", 42n],
         ["42MB", 42000000n],
 		["42mb", 42000000n],
