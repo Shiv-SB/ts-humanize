@@ -1,4 +1,4 @@
-[**ts-humanize v0.3.0**](../README.md)
+[**ts-humanize v0.4.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **parseBigBytes**(`bytes`): `undefined` \| `bigint`
 
-Defined in: [bytes/bigBytes.ts:103](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/bytes/bigBytes.ts#L103)
+Defined in: [bytes/bigBytes.ts:103](https://github.com/Shiv-SB/ts-humanize/blob/28b6c4fe653b4af34bfa09de7ea701f96d00b0f4/src/bytes/bigBytes.ts#L103)
 
 Parses a string representation of big bytes into the number of bytes it represents as BigInt.
 

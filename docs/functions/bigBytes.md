@@ -1,4 +1,4 @@
-[**ts-humanize v0.3.0**](../README.md)
+[**ts-humanize v0.4.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **bigBytes**(`bytes`): `string`
 
-Defined in: [bytes/bigBytes.ts:70](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/bytes/bigBytes.ts#L70)
+Defined in: [bytes/bigBytes.ts:70](https://github.com/Shiv-SB/ts-humanize/blob/28b6c4fe653b4af34bfa09de7ea701f96d00b0f4/src/bytes/bigBytes.ts#L70)
 
 Produces a human-readable representation of a large SI size using BigInt.
 

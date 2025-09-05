@@ -1,4 +1,4 @@
-[**ts-humanize v0.3.0**](../README.md)
+[**ts-humanize v0.4.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **commify**(`x`, `locale?`): `string`
 
-Defined in: [formatting/comma.ts:9](https://github.com/Shiv-SB/ts-humanize/blob/9bcd5691bb2e0fd42cdb53f92863e87ba5754d6e/src/formatting/comma.ts#L9)
+Defined in: [formatting/comma.ts:9](https://github.com/Shiv-SB/ts-humanize/blob/28b6c4fe653b4af34bfa09de7ea701f96d00b0f4/src/formatting/comma.ts#L9)
 
 Formats a number or bigint with commas as thousands separators, using the specified locale.
 Note: Will round the input to 3 decimal places by default.
