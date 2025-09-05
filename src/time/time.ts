@@ -7,7 +7,7 @@ dayjs.extend(_relativeTime.default);
  * Returns a human-readable relative time string between two dates/times.
  *
  * @param timeInPast - The earlier time (Date or Dayjs instance).
- * @param timeInFuture - The later time (Date or Dayjs instance).
+ * @param timeInFuture - The later time (Date or Dayjs instance). Optional/Defaults to the current time.
  * @returns A string describing the relative time (e.g., "2 hours ago", "in 5 minutes").
  *
  * @example
@@ -15,14 +15,14 @@ dayjs.extend(_relativeTime.default);
  * // => "2 hours ago"
  *
  * @example
- * relativeTime(dayjs().subtract(1, 'day'), dayjs());
+ * relativeTime(dayjs().subtract(1, 'day'));
  * // => "a day ago"
  *
  * @example
  * relativeTime(dayjs(), dayjs().add(3, 'days'));
  * // => "in 3 days"
  */
-export function relativeTime(timeInPast: Date | Dayjs, timeInFuture: Date | Dayjs): string {
+export function relativeTime(timeInPast: Date | Dayjs, timeInFuture: Date | Dayjs = new Date()): string {
     return dayjs(timeInPast).from(timeInFuture);
 }
 

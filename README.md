@@ -64,8 +64,7 @@ function subtractDaysFromDate(date: Date, days: number): Date {
 }
 
 const pastDate = subtractDaysFromDate(new Date(), 7);
-const currentDate = new Date();
-console.log("This was modified", relativeTime(pastDate, currentDate)); // This was modified 7 days ago
+console.log("This was modified", relativeTime(pastDate)); // This was modified 7 days ago
 ```
 
 ## Development
