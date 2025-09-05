@@ -57,8 +57,24 @@ describe("computeSI", () => {
 
     test.each(testValues)("%p should return %p", (num, output) => {
         const result = computeSI(num);
-        expect(result[0]).toBe(output[0]);
-        expect(result[1]).toBe(output[1]);
+        expect(result).toStrictEqual(output);
     });
 
+    describe("rounded values", () => {
+        const testValues: [number, number, [number, SI_PREFIXES]][] = [
+            [1e-30, 6, [1, "q"]],
+            [2.23456789e-12, 4, [2.2346, "p"]],
+            [2.23456789e-12, 2, [2.23, "p"]],
+            [1234567, 2, [1.23, "M"]],
+            [1234567, 0, [1, "M"]],
+            [2.9999999e3, 3, [3, "k"]],
+            [-2.23456789e-12, 3, [-2.235, "p"]],
+            [0.000123456, 5, [123.456, "µ"]],
+        ];
+
+        test.each(testValues)("%p rounded to %p D.P should return %p", (num, round, output) => {
+            const result = computeSI(num, round);
+            expect(result).toStrictEqual(output);
+        });
+    });
 });
