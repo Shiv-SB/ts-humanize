@@ -20,6 +20,9 @@ jobs:
         with:
           version: "latest"
 
+      - name: Set up Node and NPM
+        uses: actions/setup-node@v5
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 
@@ -51,7 +54,7 @@ jobs:
         run: bun run build
 
       - name: Publish to NPM
-        run: bun publish --dry-run
+        run: npm publish --dry-run
 
 
       
