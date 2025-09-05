@@ -205,3 +205,24 @@ Run tsc to check for type errors:
 ```shell
 bun lint
 ```
+
+### Publishing
+
+For publishing to NPM, you can rely on the builtin `./npm-publish.yml` action.
+
+Increment the version using:
+
+```shell
+bun bump
+# which is just an alias for
+# bun pm version patch
+```
+
+This updates the package.json version and adds a git tag.
+Then, push the branch with:
+
+```shell
+bun push
+# which is just an alias for
+# git push --follow-tags
+```
