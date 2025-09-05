@@ -53,7 +53,7 @@ jobs:
         run: bun lint
 
       - name: Run tests
-        run: bun test
+        run: AGENT=1 bun test --bail=10
 
       - name: Build package
         run: bun run build
