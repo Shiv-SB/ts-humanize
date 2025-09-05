@@ -42,6 +42,32 @@ parseBytes("42 MB"); // 42000000
 humanize.parseBytes("42 MB");
 ```
 
+### Examples
+
+#### Sizes
+
+```typescript
+import { bytes } from "humanize-ts";
+
+console.log("This file is:", bytes(82854982)); // This file is 83 MB
+```
+
+#### Times
+
+```typescript
+import { relativeTime } from "./src";
+
+function subtractDaysFromDate(date: Date, days: number): Date {
+    const pastDate = new Date(date);
+    pastDate.setDate(pastDate.getDate() - days);
+    return pastDate;
+}
+
+const pastDate = subtractDaysFromDate(new Date(), 7);
+const currentDate = new Date();
+console.log("This was modified", relativeTime(pastDate, currentDate)); // This was modified 7 days ago
+```
+
 ## Development
 
 Like the original Go-Humanize library, all functionality is provided as standalone functions—no classes or single entry points.  
