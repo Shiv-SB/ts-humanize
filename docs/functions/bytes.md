@@ -1,4 +1,4 @@
-[**ts-humanize v0.4.0**](../README.md)
+[**ts-humanize v0.4.1**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **bytes**(`bytes`): `string`
 
-Defined in: [bytes/bytes.ts:45](https://github.com/Shiv-SB/ts-humanize/blob/28b6c4fe653b4af34bfa09de7ea701f96d00b0f4/src/bytes/bytes.ts#L45)
+Defined in: [bytes/bytes.ts:45](https://github.com/Shiv-SB/ts-humanize/blob/0d540451c5699973f9888531eb0bca5d6cf7fae3/src/bytes/bytes.ts#L45)
 
 Produces a human-readable representation of an SI size.
 

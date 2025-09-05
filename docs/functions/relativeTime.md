@@ -1,4 +1,4 @@
-[**ts-humanize v0.4.0**](../README.md)
+[**ts-humanize v0.4.1**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **relativeTime**(`timeInPast`, `timeInFuture`): `string`
 
-Defined in: [time/time.ts:25](https://github.com/Shiv-SB/ts-humanize/blob/28b6c4fe653b4af34bfa09de7ea701f96d00b0f4/src/time/time.ts#L25)
+Defined in: [time/time.ts:25](https://github.com/Shiv-SB/ts-humanize/blob/0d540451c5699973f9888531eb0bca5d6cf7fae3/src/time/time.ts#L25)
 
 Returns a human-readable relative time string between two dates/times.
 
@@ -22,7 +22,7 @@ The earlier time (Date or Dayjs instance).
 
 ### timeInFuture
 
-The later time (Date or Dayjs instance).
+The later time (Date or Dayjs instance). Optional/Defaults to the current time.
 
 `Dayjs` | `Date`
 
@@ -40,7 +40,7 @@ relativeTime(new Date('2024-06-01T10:00:00Z'), new Date('2024-06-01T12:00:00Z'))
 ```
 
 ```ts
-relativeTime(dayjs().subtract(1, 'day'), dayjs());
+relativeTime(dayjs().subtract(1, 'day'));
 // => "a day ago"
 ```
 
