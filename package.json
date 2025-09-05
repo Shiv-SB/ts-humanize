@@ -52,7 +52,8 @@
         "generate:types": "bunx tsc --p tsconfig.build.json",
         "generate:docs": "bunx typedoc",
         "bump": "bun pm version",
-        "build": "bun compile && bun generate:types && bun generate:docs"
+        "build": "bun compile && bun generate:types && bun generate:docs",
+        "push": "git push --follow-tags"
     },
     "repository": {
         "type": "github"
