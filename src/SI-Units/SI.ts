@@ -5,7 +5,7 @@ import { siPrefixTable, type SI_PREFIXES } from "../units/SI.units";
  * and returns the prefix along with the value adjusted to be within
  * that prefix
  * 
- * Will round to 6 decimal places.
+ * Will round to a maximum of 6 decimal places.
  * 
  * See also: SI, parseSI
  * 

@@ -19,6 +19,8 @@ npm install ts-humanize
 
 ## Usage
 
+### Imports
+
 Several import syntaxes can be used.
 
 For example, to import `parseBytes`:
@@ -43,6 +45,9 @@ humanize.parseBytes("42 MB");
 ```
 
 ### Examples
+
+Below are examples from some of the functions from each category.
+See [Docs](docs/README.md) or the `docs` folder for full documentation on each function.
 
 #### Sizes
 
@@ -85,15 +90,32 @@ console.log(`You owe me £${commify(5_033_482)}`); // You owe me £5,033,482
 console.log(commify(1234567n, "de-DE")) // 1.234.567
 ```
 
+#### SI Notation
+
+```typescript
+import { computeSI } from "ts-humanize";
+
+console.log(computeSI(2.2244001105545e-13)) // [ 222.445, "f" ]
+```
+
+#### English Specific Functions
+
+```typescript
+import * as english from "ts-humanize/english";
+
+console.log(english.pluralWord(5, "bus")); // 5 buses
+console.log(english.wordSeries(["foo", "bar", "baz"], "and")); // foo, bar and baz
+
+```
+
+####
 
 ## Development
 
-Like the original Go-Humanize library, all functionality is provided as standalone functions—no classes or single entry points.  
-This design enables optimal tree-shaking.
+Like the original Go-Humanize library, all functionality is provided as standalone functions—no classes or single entry points.
+In the JS ecosytem this design enables optimal tree-shaking when bundling, especially when using ESM subpath imports.
 
 Functions are grouped by category (bytes, ordinals, etc).
-
-See [Docs](docs/README.md) for full documentation on each function.
 
 This library was built to be developed in Bun. There are Bun specific tools which will not work in Node or Deno (e.g Buns bundler and test runner).
 
