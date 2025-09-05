@@ -30,7 +30,7 @@ jobs:
         run: bun --revision
 
       - name: Show Bun uname
-        run: bun uname -mprs
+        run: uname -mprs
 
       - name: Validate package.json version matched tag
         run: |
