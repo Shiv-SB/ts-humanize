@@ -1,4 +1,4 @@
-[**ts-humanize v0.4.1**](../README.md)
+[**ts-humanize v0.5.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **ordinal**(`x`): `string`
 
-Defined in: [ordinals/ordinals.ts:12](https://github.com/Shiv-SB/ts-humanize/blob/0d540451c5699973f9888531eb0bca5d6cf7fae3/src/ordinals/ordinals.ts#L12)
+Defined in: [ordinals/ordinals.ts:12](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/ordinals/ordinals.ts#L12)
 
 Returns the ordinal representation of a number (e.g., 1st, 2nd, 3rd, 4th).
 

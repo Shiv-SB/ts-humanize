@@ -1,4 +1,4 @@
-[**ts-humanize v0.4.1**](../README.md)
+[**ts-humanize v0.5.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **computeSI**(`input`, `roundTo?`): \[`number`, `SI_PREFIXES`\]
 
-Defined in: [SI-Units/SI.ts:20](https://github.com/Shiv-SB/ts-humanize/blob/0d540451c5699973f9888531eb0bca5d6cf7fae3/src/SI-Units/SI.ts#L20)
+Defined in: [SI-Units/SI.ts:20](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/SI-Units/SI.ts#L20)
 
 Finds the most appropriate SI prefix for the given number
 and returns the prefix along with the value adjusted to be within
