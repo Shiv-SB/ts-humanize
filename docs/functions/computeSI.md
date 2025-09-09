@@ -8,7 +8,7 @@
 
 > **computeSI**(`input`, `roundTo?`): \[`number`, `SI_PREFIXES`\]
 
-Defined in: [SI-Units/SI.ts:20](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/SI-Units/SI.ts#L20)
+Defined in: [SI-Units/SI.ts:20](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/SI-Units/SI.ts#L20)
 
 Finds the most appropriate SI prefix for the given number
 and returns the prefix along with the value adjusted to be within

@@ -13,12 +13,29 @@ const args = Bun.argv.slice(2);
 const barrelFiles: ReadonlyArray<string> = await getBarrelFiles();
 const fileMap = getParentFoldersFromFiles(barrelFiles);
 
+console.log(fileMap);
+
 const exportMessage = `// This file is generated automatically. See README or scripts/build.ts for more details.`;
 
 function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log") {
     const c = Bun.color(col, "ansi") ?? "";
     const r = "\x1b[0m"
     console[lvl](`${c}${data}${r}`);
+}
+
+
+/**
+ * Returns the root folder from a file path.
+ * Example: "src/utils/file.ts" -> "src"
+ */
+export function getRootFolder(filePath: string): string {
+  // Normalize for consistent separators across OSes
+  const normalized = path.normalize(filePath);
+
+  // Split into segments
+  const parts = normalized.split(path.sep).filter(Boolean);
+
+  return parts.length > 0 ? parts[0]! : "";
 }
 
 /**
@@ -36,7 +53,8 @@ function getParentFoldersFromFiles(files: ReadonlyArray<string>): ReadonlyMap<st
     }
     for (const folder of folders) {
         const matchingFiles = files.filter((file) => {
-            const rootFolderFromFile = file.split("/")[0];
+            console.log(file);
+            const rootFolderFromFile = getRootFolder(file);
             return rootFolderFromFile === folder;
         });
         output.set(folder, matchingFiles);

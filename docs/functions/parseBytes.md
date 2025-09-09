@@ -8,7 +8,7 @@
 
 > **parseBytes**(`bytes`): `undefined` \| `number`
 
-Defined in: [bytes/bytes.ts:117](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/bytes/bytes.ts#L117)
+Defined in: [bytes/bytes.ts:117](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/bytes/bytes.ts#L117)
 
 Parses a string representation of bytes into the number of bytes it represents.
 

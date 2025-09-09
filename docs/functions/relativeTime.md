@@ -8,7 +8,7 @@
 
 > **relativeTime**(`timeInPast`, `timeInFuture`): `string`
 
-Defined in: [time/time.ts:25](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/time/time.ts#L25)
+Defined in: [time/time.ts:25](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/time/time.ts#L25)
 
 Returns a human-readable relative time string between two dates/times.
 

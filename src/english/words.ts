@@ -1,4 +1,4 @@
-import { commify } from "../formatting";
+import { commify } from "../formatting/comma";
 
 /**
  * These are included because they are common techincal terms.

@@ -8,7 +8,7 @@
 
 > **bigBytes**(`bytes`): `string`
 
-Defined in: [bytes/bigBytes.ts:70](https://github.com/Shiv-SB/ts-humanize/blob/07d80aa56dc5c566d6991c06aec6c42de581579d/src/bytes/bigBytes.ts#L70)
+Defined in: [bytes/bigBytes.ts:70](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/bytes/bigBytes.ts#L70)
 
 Produces a human-readable representation of a large SI size using BigInt.
 
