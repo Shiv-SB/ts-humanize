@@ -34,7 +34,7 @@ describe("commify", () => {
         expect(commify(num)).toBe(str);
     });
 
-    test("with decimals", () => {
+    describe("with decimals", () => {
         const floatList: [number, string][] = [
             [1000.01, "1,000.01"],
             [1000000.123, "1,000,000.123"],
@@ -49,5 +49,14 @@ describe("commify", () => {
         test.each(floatList)("%p should format to %p", (num, str) => {
             expect(commify(num)).toBe(str);
         });
+    });
+
+    test("with locale", () => {
+        const input = 1234567.891;
+        const NBSP = String.fromCharCode(160);
+
+        expect(commify(input)).toBe("1,234,567.891");
+        expect(commify(input, "de-DE")).toBe("1.234.567,891");
+        expect(commify(input, ["fr-CA", "en-US"])).toBe(`1${NBSP}234${NBSP}567,891`);
     });
 });
