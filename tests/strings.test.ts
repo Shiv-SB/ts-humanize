@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { capitalizeSentence, capitalizeWord } from "../src/formatting/strings";
+import { capitalizeSentence, capitalizeWord, formatSentance } from "../src/formatting/strings";
 
 describe("capitalizeWord", () => {
     const testList: [string, string][] = [
@@ -47,4 +47,33 @@ describe("capitalizeSentance", () => {
             expect(capitalizeSentence(sentace, cap)).toBe(expected);
         }
     );
+});
+
+describe("formatSentance", () => {
+    type Opts = Parameters<typeof formatSentance>[1];
+    const testList: [string, string, Opts][] = [
+        ["foo", "Foo", undefined],
+        ["foo bar", "Foo bar", undefined],
+        ["  foo Bar", "Foo bar", undefined],
+        ["  foo   bar  ", "Foo bar", undefined],
+        ["\nfoo\n\nbar \n ", "Foo bar", undefined],
+        ["     foo bar", "Foo bar", undefined],
+        ["foo bar     ", "Foo bar", undefined],
+        ["\t\tfoo\tbar\t", "Foo bar", undefined],
+        ["   FOO bar", "Foo bar", undefined],
+        ["foo BAR baz", "Foo bar baz", undefined],
+        ["foo NASA bar", "Foo nasa bar", undefined],
+        ["foo NASA bar", "Foo NASA bar", { preserve: ["NASA"], capitalizeAllWords: false }],
+        ["foo NASA bar", "Foo NASA Bar", { preserve: ["NASA"], capitalizeAllWords: true }],
+        ["foo bar baz", "Foo Bar Baz", { capitalizeAllWords: true }],
+        ["   foo   BAR   baz   ", "Foo Bar Baz", { capitalizeAllWords: true }],
+        ["   foo   BAR   baz   ", "Foo BAR baz", { preserve: ["BAR"], capitalizeAllWords: false }],
+        ["", "", undefined],
+        ["   ", "", undefined],
+        ["\n", "", undefined],
+    ];
+
+    test.each(testList)("%p should format to %p", (sentance, expected, opts) => {
+        expect(formatSentance(sentance, opts)).toBe(expected);
+    })
 });

@@ -1,8 +1,3 @@
-// TODO:
-// - optimise all of this
-//      - look into bitwise shifts to capitilise
-//      - handle line breaks?
-
 const WHITESPACE_CODES: number[] = [
     9, 10, 11, 12, 13, 32, 133, 160, 5760, 8192, 8193, 8194, 8195, 8196, 8197,
     8198, 8199, 8200, 8201, 8202, 8232, 8233, 8239, 8287, 12288,
@@ -18,6 +13,16 @@ function isWhiteSpace(str: string): boolean {
     if (!str) return false;
     if (str.length !== 1) return false;
     return WHITESPACE_CODES.includes(str.charCodeAt(0));
+}
+
+/**
+ * Normalizes a word to lowercase unless it's in the preserve list.
+ * @private
+ */
+function normalizeWord(word: string, preserve?: string[]): string {
+    if (!word) return "";
+    if (preserve && preserve.includes(word)) return word;
+    return word.toLowerCase();
 }
 
 export function capitalizeWord(str: string): string {
@@ -93,25 +98,19 @@ export function formatSentance(
 ) {
     if (!sentence) return "";
     const { preserve, capitalizeAllWords = false } = options || {};
-    const trimmed = sentence.trim();
-    const len = trimmed.length;
-    let output: string[] = [];
 
-    for (let i = 0; i < len; i++) {
-        const char = trimmed[i]!;
-        if (i === 0) {
-            output[i] = char.toUpperCase();
-            continue;
+    // Split by whitespace, filter out empty strings (removes extra spaces)
+    const words = sentence.trim().split(/\s+/);
+
+    const formattedWords = words.map((word, idx) => {
+        const normalized = normalizeWord(word, preserve);
+        if (idx === 0 || capitalizeAllWords) {
+            // Capitalize first letter, rest as normalized
+            return normalized.charAt(0).toUpperCase() + normalized.slice(1);
         }
-        const isStartOfWord: boolean = isWhiteSpace(trimmed[i - 1]!);
-        if (capitalizeAllWords && isStartOfWord) {
-            output[i] = char.toUpperCase();
-            continue;
-        }
-        if (isStartOfWord && isWhiteSpace(char)) {
-            continue;
-        }
-        output[i] = char;
-    }
-    return output.join("");
+        return normalized;
+    });
+
+    let result = formattedWords.join(" ");
+    return result;
 }
