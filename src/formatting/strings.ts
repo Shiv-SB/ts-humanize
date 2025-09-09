@@ -25,6 +25,18 @@ function normalizeWord(word: string, preserve?: string[]): string {
     return word.toLowerCase();
 }
 
+/**
+ * Capitalizes the first character of a string, preserving any leading whitespace.
+ * If the string starts with whitespace, capitalizes the first non-whitespace character after each whitespace.
+ *
+ * @param {string} str - The string to capitalize.
+ * @returns {string} The capitalized string.
+ *
+ * @example
+ * capitalizeWord("hello world"); // "Hello world"
+ * @example
+ * capitalizeWord("  hello"); // "  Hello"
+ */
 export function capitalizeWord(str: string): string {
     if (!str) return "";
 
@@ -47,8 +59,21 @@ export function capitalizeWord(str: string): string {
     return output.join("");
 }
 
-// Preserves extra spaces and padding
-// Does not normalise (e.g hElLo will become HElLo not Hello).
+/**
+ * Capitalizes the first character of a sentence, or the first character after each whitespace if capitalizeAllWords is true.
+ * Preserves all original whitespace and does not normalize letter casing except for capitalization.
+ *
+ * See formatSentance to trim and clean whitespace.
+ * 
+ * @param {string} sentence - The sentence to capitalize.
+ * @param {boolean} [capitalizeAllWords=false] - Whether to capitalize every word in the sentence.
+ * @returns {string} The capitalized sentence.
+ *
+ * @example
+ * capitalizeSentence("hello world"); // "Hello world"
+ * @example
+ * capitalizeSentence("hello   world", true); // "Hello   World"
+ */
 export function capitalizeSentence(
     sentence: string,
     capitalizeAllWords: boolean = false
@@ -84,14 +109,29 @@ type FormatSentanceOpts = {
      * @type {?string[]}
      */
     preserve?: string[];
+    
+    /**
+     * If true, will capitalize all words in the sentance, otherwise, just the first word.
+     *
+     * @type {boolean}
+     * @default {false}
+     */
     capitalizeAllWords: boolean;
 };
 
-// need to think of a good name for this.
-// will:
-// - capitalise first word
-// - remove padding and extra spaces between words
-// - normalise words (e.g hElLO -> hello)
+/**
+ * Formats a sentence by capitalizing the first word (or all words if capitalizeAllWords is true),
+ * removing extra spaces, and normalizing words to lowercase unless specified in the preserve list.
+ *
+ * @param {string} sentence - The sentence to format.
+ * @param {FormatSentanceOpts} [options] - Formatting options.
+ * @returns {string} The formatted sentence.
+ *
+ * @example
+ * formatSentance("  hElLo   wOrLD  "); // "Hello world"
+ * @example
+ * formatSentance("api HTTP response", { preserve: ["HTTP"] }); // "Api HTTP response"
+ */
 export function formatSentance(
     sentence: string,
     options?: FormatSentanceOpts
@@ -99,13 +139,11 @@ export function formatSentance(
     if (!sentence) return "";
     const { preserve, capitalizeAllWords = false } = options || {};
 
-    // Split by whitespace, filter out empty strings (removes extra spaces)
     const words = sentence.trim().split(/\s+/);
 
     const formattedWords = words.map((word, idx) => {
         const normalized = normalizeWord(word, preserve);
         if (idx === 0 || capitalizeAllWords) {
-            // Capitalize first letter, rest as normalized
             return normalized.charAt(0).toUpperCase() + normalized.slice(1);
         }
         return normalized;
