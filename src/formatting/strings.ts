@@ -130,7 +130,7 @@ type FormatSentanceOpts = {
  * @example
  * formatSentance("  hElLo   wOrLD  "); // "Hello world"
  * @example
- * formatSentance("api HTTP response", { preserve: ["HTTP"] }); // "Api HTTP response"
+ * formatSentance("API HTTP Response", { preserve: ["HTTP"] }); // "Api HTTP response"
  */
 export function formatSentance(
     sentence: string,

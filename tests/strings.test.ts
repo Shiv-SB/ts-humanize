@@ -62,7 +62,7 @@ describe("formatSentance", () => {
         ["\t\tfoo\tbar\t", "Foo bar", undefined],
         ["   FOO bar", "Foo bar", undefined],
         ["foo BAR baz", "Foo bar baz", undefined],
-        ["foo NASA bar", "Foo nasa bar", undefined],
+        ["foo NASA BAR", "Foo nasa bar", undefined],
         ["foo NASA bar", "Foo NASA bar", { preserve: ["NASA"], capitalizeAllWords: false }],
         ["foo NASA bar", "Foo NASA Bar", { preserve: ["NASA"], capitalizeAllWords: true }],
         ["foo bar baz", "Foo Bar Baz", { capitalizeAllWords: true }],
