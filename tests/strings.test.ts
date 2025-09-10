@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { capitalizeSentence, capitalizeWord, formatSentance } from "../src/formatting/strings";
+import { capitalizeSentence, capitalizeWord, formatSentence } from "../src/formatting/strings";
 
 describe("capitalizeWord", () => {
     const testList: [string, string][] = [
@@ -20,7 +20,7 @@ describe("capitalizeWord", () => {
     });
 });
 
-describe("capitalizeSentance", () => {
+describe("capitalizeSentence", () => {
     const testList: [string, boolean, string][] = [
         ["foo", false, "Foo"],
         [" foo", false, " Foo"],
@@ -49,8 +49,8 @@ describe("capitalizeSentance", () => {
     );
 });
 
-describe("formatSentance", () => {
-    type Opts = Parameters<typeof formatSentance>[1];
+describe("formatSentence", () => {
+    type Opts = Parameters<typeof formatSentence>[1];
     const testList: [string, string, Opts][] = [
         ["foo", "Foo", undefined],
         ["foo bar", "Foo bar", undefined],
@@ -73,7 +73,7 @@ describe("formatSentance", () => {
         ["\n", "", undefined],
     ];
 
-    test.each(testList)("%p should format to %p", (sentance, expected, opts) => {
-        expect(formatSentance(sentance, opts)).toBe(expected);
+    test.each(testList)("%p should format to %p", (sentence, expected, opts) => {
+        expect(formatSentence(sentence, opts)).toBe(expected);
     })
 });

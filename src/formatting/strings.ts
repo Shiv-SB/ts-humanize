@@ -63,7 +63,7 @@ export function capitalizeWord(str: string): string {
  * Capitalizes the first character of a sentence, or the first character after each whitespace if capitalizeAllWords is true.
  * Preserves all original whitespace and does not normalize letter casing except for capitalization.
  *
- * See formatSentance to trim and clean whitespace.
+ * See formatSentence to trim and clean whitespace.
  * 
  * @param {string} sentence - The sentence to capitalize.
  * @param {boolean} [capitalizeAllWords=false] - Whether to capitalize every word in the sentence.
@@ -101,7 +101,7 @@ export function capitalizeSentence(
     return output.join("");
 }
 
-type FormatSentanceOpts = {
+type FormatSentenceOpts = {
     /**
      * An optional list of strings to preserve formatting.
      * Very useful to prevent lowercasing of acronyms.
@@ -111,7 +111,7 @@ type FormatSentanceOpts = {
     preserve?: string[];
     
     /**
-     * If true, will capitalize all words in the sentance, otherwise, just the first word.
+     * If true, will capitalize all words in the sentence, otherwise, just the first word.
      *
      * @type {boolean}
      * @default {false}
@@ -124,17 +124,17 @@ type FormatSentanceOpts = {
  * removing extra spaces, and normalizing words to lowercase unless specified in the preserve list.
  *
  * @param {string} sentence - The sentence to format.
- * @param {FormatSentanceOpts} [options] - Formatting options.
+ * @param {FormatSentenceOpts} [options] - Formatting options.
  * @returns {string} The formatted sentence.
  *
  * @example
- * formatSentance("  hElLo   wOrLD  "); // "Hello world"
+ * formatSentence("  hElLo   wOrLD  "); // "Hello world"
  * @example
- * formatSentance("API HTTP Response", { preserve: ["HTTP"] }); // "Api HTTP response"
+ * formatSentence("API HTTP Response", { preserve: ["HTTP"] }); // "Api HTTP response"
  */
-export function formatSentance(
+export function formatSentence(
     sentence: string,
-    options?: FormatSentanceOpts
+    options?: FormatSentenceOpts
 ) {
     if (!sentence) return "";
     const { preserve, capitalizeAllWords = false } = options || {};

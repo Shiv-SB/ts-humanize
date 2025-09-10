@@ -132,7 +132,18 @@ console.log(english.wordSeries(["foo", "bar", "baz"], "and")); // foo, bar and b
 
 ```
 
-####
+#### Strings
+
+```typescript
+import { formatSentence } from "ts-humanize";
+
+const sentance = " hElLo   WoRLd!  ";
+console.log(formatSentance(sentence)); // Hello world!
+console.log(formatSentence(sentence, { capitalizeAllWords: true })); // Hello World!
+
+const phrase = "API HTTP Response";
+formatSentence(phrase, { preserve: ["HTTP"] }); // "Api HTTP response"
+```
 
 ## Development
 
