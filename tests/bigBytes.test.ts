@@ -16,6 +16,8 @@ describe("bigByte Parsing", () => {
 		["42 MB", 42000000n],
 		["42 MiB", 44040192n],
 		["42 mb", 42000000n],
+		["42\nmb", 42000000n],
+		["42  mb", 42000000n],
 		["42 mib", 44040192n],
 		["42 MIB", 44040192n],
 		["42.5MB", 42500000n],
@@ -44,15 +46,27 @@ describe("bigByte Parsing", () => {
         expect(parseBigBytes(str)).toBe(num);
     });
 
-    test("should error as expected", () => {
-        expect(parseBigBytes("84 JB"), "did not fail on invalid unit").toBeUndefined();
-        expect(parseBigBytes(""), "did not fail on empty string").toBeUndefined();
+	test("should be undefined for invalid units", () => {
+		expect(parseBigBytes("10 JB")).toBeUndefined();
+		expect(parseBigBytes("10 FOO")).toBeUndefined();
+	});
+
+    test("should be undefined for invalid inputs", () => {
+        expect(parseBigBytes("")).toBeUndefined();
+		expect(parseBigBytes("\n")).toBeUndefined();
+		expect(parseBigBytes("foo")).toBeUndefined();
 	});
 
 	test("should handle MAX_SAFE_INTEGER", () => {
 		expect(parseBigBytes(Number.MAX_SAFE_INTEGER.toString())).toBeDefined();
 		expect(parseBigBytes(Number.MAX_SAFE_INTEGER.toString())).toBe(9007199254740991n);
-	})
+		expect(parseBigBytes(`${Number.MAX_SAFE_INTEGER + 100}`)).toBeDefined();
+	});
+
+	test("should fail on values greater than MAX_VALUE", () => {
+		expect(parseBigBytes(`${Number.MAX_VALUE}`)).toBeUndefined();
+		expect(parseBigBytes(`${Number.MAX_VALUE + 100}`)).toBeUndefined();
+	});
 });
 
 describe("bigBytes", () => {
