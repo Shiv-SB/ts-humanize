@@ -18,6 +18,14 @@
             "import": "./build/index.js",
             "types": "./build.index.d.ts"
         },
+        "./formatting": {
+            "import": "./build/formatting/index.js",
+            "types": "./build/formatting/index.d.ts"
+        },
+        "./english": {
+            "import": "./build/english/index.js",
+            "types": "./build/english/index.d.ts"
+        },
         "./time": {
             "import": "./build/time/index.js",
             "types": "./build/time/index.d.ts"
@@ -29,14 +37,6 @@
         "./ordinals": {
             "import": "./build/ordinals/index.js",
             "types": "./build/ordinals/index.d.ts"
-        },
-        "./formatting": {
-            "import": "./build/formatting/index.js",
-            "types": "./build/formatting/index.d.ts"
-        },
-        "./english": {
-            "import": "./build/english/index.js",
-            "types": "./build/english/index.d.ts"
         },
         "./bytes": {
             "import": "./build/bytes/index.js",

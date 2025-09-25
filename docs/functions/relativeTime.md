@@ -1,4 +1,4 @@
-[**ts-humanize v0.5.0**](../README.md)
+[**ts-humanize v1.0.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **relativeTime**(`timeInPast`, `timeInFuture`): `string`
 
-Defined in: [time/time.ts:25](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/time/time.ts#L25)
+Defined in: [time/time.ts:27](https://github.com/Shiv-SB/ts-humanize/blob/540ea280fbbffb4f02169023da1f5402482baf2b/src/time/time.ts#L27)
 
 Returns a human-readable relative time string between two dates/times.
 

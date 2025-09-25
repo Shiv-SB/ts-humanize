@@ -1,4 +1,4 @@
-[**ts-humanize v0.5.0**](../README.md)
+[**ts-humanize v1.0.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **difference**(`date1`, `date2`, `unit`, `opts?`): `number`
 
-Defined in: [time/time.ts:60](https://github.com/Shiv-SB/ts-humanize/blob/b20c339cae69f529f20e775917f6cd1ea59de3d9/src/time/time.ts#L60)
+Defined in: [time/time.ts:62](https://github.com/Shiv-SB/ts-humanize/blob/540ea280fbbffb4f02169023da1f5402482baf2b/src/time/time.ts#L62)
 
 Calculates the difference between two dates/times in the specified unit.
 
@@ -30,7 +30,7 @@ The second date (Date or Dayjs instance).
 
 The unit of measurement for the difference (e.g., "days", "hours", "ms"). Defaults to "ms".
 
-`"millisecond"` | `"second"` | `"minute"` | `"hour"` | `"day"` | `"month"` | `"year"` | `"date"` | `"milliseconds"` | `"seconds"` | `"minutes"` | `"hours"` | `"days"` | `"months"` | `"years"` | `"dates"` | `"d"` | `"D"` | `"M"` | `"y"` | `"h"` | `"m"` | `"s"` | `"ms"` | `"quarter"` | `"quarters"` | `"Q"` | `"week"` | `"weeks"` | `"w"`
+`"s"` | `"y"` | `"millisecond"` | `"second"` | `"minute"` | `"hour"` | `"day"` | `"month"` | `"year"` | `"date"` | `"milliseconds"` | `"seconds"` | `"minutes"` | `"hours"` | `"days"` | `"months"` | `"years"` | `"dates"` | `"d"` | `"D"` | `"M"` | `"h"` | `"m"` | `"ms"` | `"quarter"` | `"quarters"` | `"Q"` | `"week"` | `"weeks"` | `"w"`
 
 ### opts?
 

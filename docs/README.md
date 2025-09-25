@@ -1,8 +1,8 @@
-**ts-humanize v0.5.0**
+**ts-humanize v1.0.0**
 
 ***
 
-# ts-humanize v0.5.0
+# ts-humanize v1.0.0
 
 ## Functions
 
@@ -15,7 +15,8 @@
 - [commify](functions/commify.md)
 - [computeSI](functions/computeSI.md)
 - [difference](functions/difference.md)
-- [formatSentance](functions/formatSentance.md)
+- [duration](functions/duration.md)
+- [formatSentence](functions/formatSentence.md)
 - [iBytes](functions/iBytes.md)
 - [iBytesN](functions/iBytesN.md)
 - [ordinal](functions/ordinal.md)
