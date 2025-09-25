@@ -14,7 +14,7 @@ const args = Bun.argv.slice(2);
 const barrelFiles: ReadonlyArray<string> = await getBarrelFiles();
 const fileMap = getParentFoldersFromFiles(barrelFiles);
 
-console.log(fileMap);
+//console.log(fileMap);
 
 const exportMessage = `// This file is generated automatically. See README or scripts/build.ts for more details.`;
 
@@ -23,7 +23,6 @@ function printC(col: string, data: string, lvl: "log" | "warn" | "error" = "log"
     const r = "\x1b[0m"
     console[lvl](`${c}${data}${r}`);
 }
-
 
 /**
  * Returns the root folder from a file path.
