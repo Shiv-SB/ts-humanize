@@ -1,6 +1,6 @@
 {
     "name": "ts-humanize",
-    "version": "0.5.1",
+    "version": "1.0.0",
     "description": "A TypeScript library for humanizing dates, numbers, and other values.",
     "keywords": [
         "humanize",
