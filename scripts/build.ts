@@ -160,8 +160,10 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         minify: false,
         root: srcFolder,
         // TODO: Remove ignore when Bun types is patched
-        //@ts-ignore bug in Bun types. Should be patched in >1.2.21
-        splitting: true,
+        //@ts-ignore bug in Bun types. Should be patched in >1.2.22
+        // also bug: when true, will generate duplicate exports,
+        // tracked in: https://github.com/oven-sh/bun/issues/22884
+        //splitting: true,
     });
 
     if (!result.success) {
