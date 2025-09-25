@@ -2,6 +2,7 @@ import { Glob } from "bun";
 import path from "node:path";
 import { watch } from "fs/promises";
 import packageJSON from "../package.json";
+import { bytes } from "../src";
 
 const rootFolder = path.resolve(import.meta.dir, "..");
 const srcFolder = path.resolve(rootFolder, "src");
@@ -160,7 +161,7 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         root: srcFolder,
         // TODO: Remove ignore when Bun types is patched
         //@ts-ignore bug in Bun types. Should be patched in >1.2.21
-        //splitting: true,
+        splitting: true,
     });
 
     if (!result.success) {
@@ -171,10 +172,13 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
     } else {
         console.timeLog("Build Complete");
         if (fileLogging) {
+            let totalSize = 0;
             console.log("Built files:");
             for (const file of result.outputs) {
                 printC("green", ` > ${path.basename(file.path)}`);
+                totalSize += file.size;
             }
+            console.log("Total size of .js files:", bytes(totalSize));
         }
     }
 }
