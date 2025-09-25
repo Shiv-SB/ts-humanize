@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { relativeTime, difference } from "../src/time/time";
+import { relativeTime, difference, duration } from '../src/time/time';
 import dayjs from "dayjs";
 
 describe("relativeMagnitude", () => {
@@ -112,3 +112,34 @@ describe("difference", () => {
     });
 });
 
+describe("duration", () => {
+    test("invalid args", () => {
+        function wrapper(...args: any) {
+            return duration(...args as Parameters<typeof duration>);
+        }
+
+        expect(wrapper("")).toBeUndefined();
+        expect(wrapper(undefined)).toBeUndefined();
+        expect(wrapper()).toBeUndefined();
+        expect(wrapper([1])).toBeUndefined();
+        expect(duration(Number.MAX_SAFE_INTEGER)).toBeUndefined();
+        expect(duration(Infinity)).toBeUndefined();
+        console.log(duration(30_000_000))
+    });
+
+    type Conf = Parameters<typeof duration>[1];
+
+    const testList: [number, Conf, string][] = [
+        [100, undefined, "a few seconds"],
+        [100, { unit: "ms" }, "a few seconds"],
+        [1, { unit: "day" }, "a day"],
+        [5, { unit: "d" }, "5 days"],
+        [-5, { unit: "d"}, "5 days"],
+        [1, { unit: "year" }, "a year"],
+        [5, { unit: "year" }, "5 years"],
+    ];
+
+    test.each(testList)("%p with options %p should format to %p", (num, config, str) => {
+        expect(duration(num, config)).toBe(str);
+    });
+});

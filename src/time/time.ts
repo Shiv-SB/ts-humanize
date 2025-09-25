@@ -1,7 +1,9 @@
 import dayjs, { Dayjs } from "dayjs";
 import * as _relativeTime from 'dayjs/plugin/relativeTime';
+import Duration, { type DurationUnitType } from "dayjs/plugin/duration";
 
 dayjs.extend(_relativeTime.default);
+dayjs.extend(Duration);
 
 /**
  * Returns a human-readable relative time string between two dates/times.
@@ -27,7 +29,7 @@ export function relativeTime(timeInPast: Date | Dayjs, timeInFuture: Date | Dayj
 }
 
 type DifferenceOpts = {
-    
+
     /**
      * If true, rounds the result to the nearest integer. If false, returns a floating point value. Defaults to true.
      *
@@ -63,4 +65,44 @@ export function difference(date1: Date | Dayjs, date2: Date | Dayjs, unit: dayjs
     } = opts || {};
 
     return dayjs(date1).diff(date2, unit, !roundResult);
+}
+
+type DurationOptions = {
+    
+    /**
+     * The unit to be used to parse the duration.
+     * @default "ms"
+     * @type {?DurationUnitType}
+     * @example
+     * "second"
+     * "years"
+     * "ms"
+     * "hour"
+     * "weeks"
+     */
+    unit?: DurationUnitType;
+}
+
+/**
+ * Formats a duration to a human readable string.
+ * 
+ * Negative numbers will be treated as positives
+ *
+ * @param {number} dur 
+ * @param {?DurationOptions} [options] 
+ * @returns {(string | undefined)} 
+ * @example
+ * duration(30_000_000);
+ * // => "8 hours"
+ * 
+ * duration(3, { unit: "weeks" });
+ * // => "3 weeks"
+ */
+export function duration(dur: number, options?: DurationOptions): string | undefined {
+    const {
+        unit = "ms",
+    } = options || {};
+    if (typeof dur !== "number") return undefined;
+    if (!Number.isFinite(dur) || dur >= Number.MAX_SAFE_INTEGER) return undefined;
+    return dayjs.duration(dur, unit).humanize(false);
 }
