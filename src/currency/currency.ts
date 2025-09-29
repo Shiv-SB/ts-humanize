@@ -1,22 +1,20 @@
 import { currencyMap, type ISO_4217_Code } from '../units/currency.units';
 
-type CurrencyOptions = {
-    includeSpace?: boolean;
+function normalizeCurrencyOutput(input: string): string {
+  return input
+    .replace(/[\u200e\u200f\u061c\u202A-\u202E]/g, "")  // Remove directionality
+    .replace(/\s+/g, "");                               // Remove all spaces (or use trim if you prefer)
 }
 
 // A lightweight wrapper around toLocaleString which provides type and runtime safety.
-export function currency(amount: number, currencyCode: ISO_4217_Code, options?: CurrencyOptions): string | undefined {
+export function currency(amount: number, currencyCode: ISO_4217_Code): string | undefined {
     if (typeof amount !== "number") return undefined;
     const curr = currencyMap.get(currencyCode);
     if (!curr) return undefined;
 
-    const {
-        includeSpace = false,
-    } = options || {};
-
     if (curr.isNonStandardCurrency) {
         const value = amount.toFixed(curr.decimalPlaces);
-        return `${curr.symbol}${includeSpace ? " " : ""}${value}`;
+        return `${curr.symbol}${value}`;
     }
 
     const formatter = Intl.NumberFormat(curr.localeCode, {
@@ -25,23 +23,8 @@ export function currency(amount: number, currencyCode: ISO_4217_Code, options?: 
         currency: currencyCode,
     });
 
-    const parts = formatter.formatToParts(amount);
-    const pLen = parts.length;
-    let value = "";
-
-    for (let i = 0; i < pLen; i++) {
-        const part = parts[i]!;
-        console.log("part", part.type);
-
-        switch (part.type) {
-            case "currency":
-                value += `${part.value}${includeSpace ? " " : ""}`
-                break;
-            default:
-                value += part.value;
-                break;
-        }
-    }
-
-    return value;
+    const value = formatter.format(amount);
+    return normalizeCurrencyOutput(value);
 }
+
+

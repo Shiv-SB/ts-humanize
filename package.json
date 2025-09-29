@@ -65,7 +65,7 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@types/bun": "1.2.22",
+        "@types/bun": "1.2.23",
         "typedoc": "^0.28.13",
         "typedoc-plugin-markdown": "^4.9.0"
     },
