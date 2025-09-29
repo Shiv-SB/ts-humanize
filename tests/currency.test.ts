@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { currency } from "../src/currency/currency";
+import { currency, currencyWithName } from "../src/currency/currency";
 import { type ISO_4217_Code } from "../src/units/currency.units";
 
 describe.concurrent("currency", () => {
@@ -11,6 +11,7 @@ describe.concurrent("currency", () => {
         [12345, "CAD", "$12,345.00"],
         // negative numbers
         [-100, "GBP", "-£100.00"],
+        [-50, "USD", "-$50.00"],
     ];
 
     test.each(testList)("%p with code %p should format to %p", (num, code, exp) => {
@@ -19,8 +20,12 @@ describe.concurrent("currency", () => {
 
     test("shouldnt throw errors", () => {
         expect(() => {
-            currency(100, "FOO-BAR" as ISO_4217_Code)
+            currency(100, "FOO-BAR" as ISO_4217_Code);
         }).not.toThrowError();
+    });
+
+    test("fallback for missing code", () => {
+        expect(currency(100, "Foo" as ISO_4217_Code)).toBe("FOO 100.00");
     });
 
     describe("test all explicit intl symbols", () => {
@@ -77,6 +82,21 @@ describe.concurrent("currency", () => {
             expect(currency(val, code)).toBe(exp);
         });
     });
-
 });
 
+describe.concurrent("currencyWithName", () => {
+    const val = 100;
+    const testList: [ISO_4217_Code, string][] = [
+        ["USD", "$100.00 (US Dollar)"],
+        ["EUR", "€100.00 (Euro)"],
+        ["BTC", "100.00000000 (Bitcoin)"],
+    ];
+
+    test.each(testList)(`${val} with code %p should be %p`, (code, exp) => {
+        expect(currencyWithName(val, code)).toBe(exp);
+    });
+
+    test("fallback for missing code", () => {
+        expect(currencyWithName(val, "FOO-BAR" as ISO_4217_Code)).toBe("FOO-BAR 100.00")
+    });
+});
