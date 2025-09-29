@@ -11,7 +11,7 @@ const specialPlurals: Map<string, string> = new Map([
     ["vertex", "verticies"],
 ]);
 
-const sibilantEndings = ["s", "sh", "tch", "x"];
+const sibilantEndings = ["ch", "s", "sh", "x", "z"];
 
 function isVowel(x: string): boolean {
     return ["a", "e", "i", "o", "u"].includes(x.toLowerCase());

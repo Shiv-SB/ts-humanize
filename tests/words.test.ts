@@ -8,7 +8,8 @@ describe("pluralWord", () => {
         [-1, "object", undefined, "objects"],
         [42, "object", undefined, "objects"],
         [2, "vax", "vaxen", "vaxen"],
-        
+        [2, "church", undefined, "churches"],
+        [2, "waltz", undefined, "waltzes"],
         // special cases
         [2, "index", undefined, "indices"],
 
