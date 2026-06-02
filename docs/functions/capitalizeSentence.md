@@ -1,4 +1,4 @@
-[**ts-humanize v1.0.0**](../README.md)
+[**ts-humanize v1.0.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **capitalizeSentence**(`sentence`, `capitalizeAllWords?`): `string`
 
-Defined in: [formatting/strings.ts:77](https://github.com/Shiv-SB/ts-humanize/blob/540ea280fbbffb4f02169023da1f5402482baf2b/src/formatting/strings.ts#L77)
+Defined in: [formatting/strings.ts:77](https://github.com/Shiv-SB/ts-humanize/blob/709cbb94bf4de9ca51ef719ecc2d1553d2da54c5/src/formatting/strings.ts#L77)
 
 Capitalizes the first character of a sentence, or the first character after each whitespace if capitalizeAllWords is true.
 Preserves all original whitespace and does not normalize letter casing except for capitalization.

@@ -1,4 +1,4 @@
-[**ts-humanize v1.0.0**](../README.md)
+[**ts-humanize v1.0.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **pluralWord**(`quantity`, `singular`, `plural?`): `string`
 
-Defined in: [english/words.ts:37](https://github.com/Shiv-SB/ts-humanize/blob/540ea280fbbffb4f02169023da1f5402482baf2b/src/english/words.ts#L37)
+Defined in: [english/words.ts:37](https://github.com/Shiv-SB/ts-humanize/blob/709cbb94bf4de9ca51ef719ecc2d1553d2da54c5/src/english/words.ts#L37)
 
 pluralWord builds the plural form of an English word.
 

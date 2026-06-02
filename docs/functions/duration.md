@@ -1,4 +1,4 @@
-[**ts-humanize v1.0.0**](../README.md)
+[**ts-humanize v1.0.2**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **duration**(`dur`, `options?`): `undefined` \| `string`
 
-Defined in: [time/time.ts:101](https://github.com/Shiv-SB/ts-humanize/blob/540ea280fbbffb4f02169023da1f5402482baf2b/src/time/time.ts#L101)
+Defined in: [time/time.ts:101](https://github.com/Shiv-SB/ts-humanize/blob/709cbb94bf4de9ca51ef719ecc2d1553d2da54c5/src/time/time.ts#L101)
 
 Formats a duration to a human readable string.
 

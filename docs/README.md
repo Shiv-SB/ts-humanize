@@ -1,8 +1,8 @@
-**ts-humanize v1.0.0**
+**ts-humanize v1.0.2**
 
 ***
 
-# ts-humanize v1.0.0
+# ts-humanize v1.0.2
 
 ## Functions
 

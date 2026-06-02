@@ -111,12 +111,16 @@ type FormatSentenceOpts = {
     preserve?: string[];
     
     /**
-     * If true, will capitalize all words in the sentence, otherwise, just the first word.
+     * If true, will capitalize all words in the sentence.
+     * 
+     * If set to "preserve", no casings will change at all.
+     * 
+     * Will capitalize only the first word by default.
      *
      * @type {boolean}
      * @default {false}
      */
-    capitalizeAllWords: boolean;
+    capitalizeAllWords: boolean | "preserve";
 };
 
 /**
@@ -141,6 +145,10 @@ export function formatSentence(
 
     const words = sentence.trim().split(/\s+/);
 
+    if (capitalizeAllWords === "preserve") {
+        return words.join(" ");
+    }
+
     const formattedWords = words.map((word, idx) => {
         const normalized = normalizeWord(word, preserve);
         if (idx === 0 || capitalizeAllWords) {
@@ -149,6 +157,5 @@ export function formatSentence(
         return normalized;
     });
 
-    let result = formattedWords.join(" ");
-    return result;
+    return formattedWords.join(" ");
 }

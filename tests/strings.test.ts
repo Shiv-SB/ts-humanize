@@ -49,7 +49,7 @@ describe("capitalizeSentence", () => {
     );
 });
 
-describe("formatSentence", () => {
+describe(formatSentence, () => {
     type Opts = Parameters<typeof formatSentence>[1];
     const testList: [string, string, Opts][] = [
         ["foo", "Foo", undefined],
@@ -71,6 +71,10 @@ describe("formatSentence", () => {
         ["", "", undefined],
         ["   ", "", undefined],
         ["\n", "", undefined],
+        ["foo Bar baz", "foo Bar baz", { capitalizeAllWords: "preserve" }],
+        ["foo   Bar\n Baz", "foo Bar Baz", { capitalizeAllWords: "preserve" }],
+        ["Foo  Bar  baz", "Foo Bar baz", { capitalizeAllWords: "preserve" }],
+
     ];
 
     test.each(testList)("%p should format to %p", (sentence, expected, opts) => {
