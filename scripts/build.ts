@@ -158,9 +158,7 @@ async function build(opts?: { fileLogging: boolean }): Promise<void> {
         outdir: "build",
         minify: false,
         root: srcFolder,
-        // BUG: when true, will generate duplicate exports,
-        // tracked in: https://github.com/oven-sh/bun/issues/22884
-        splitting: false,
+        splitting: true,
     });
 
     if (!result.success) {
